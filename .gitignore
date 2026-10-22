@@ -1,0 +1,7 @@
+node_modules/
+dist/
+*.log
+.DS_Store
+Thumbs.db
+belediye_v3_data_cloud.json
+belediye_v3_server_data.json

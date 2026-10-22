@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: eldivan-belediye-portali
+    runtime: node
+    plan: free
+    buildCommand: echo "No build step needed"
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ENCRYPTION_KEY
+        value: ELDIVAN-BLD-2026-GIZLI-ANAHTAR

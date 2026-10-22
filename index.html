@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>T.C. Eldivan Belediye Başkanlığı - Önemli Günler, Evrak & Ajanda Portalı v3.0</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- MANDATORY LOGIN SCREEN OVERLAY -->
+  <div id="login-overlay" class="login-backdrop">
+    <div class="login-card" style="max-width:560px;">
+      <div class="login-header">
+        <img src="icon.png" alt="Eldivan Belediye Logo" class="login-logo">
+        <span class="login-sub">T.C. ELDİVAN BELEDİYE BAŞKANLIĞI</span>
+        <h1 class="login-title">Başkanlık, Özel Kalem & Birimler Giriş Paneli</h1>
+      </div>
+
+      <div class="quick-login-box" style="margin-bottom:14px; margin-top:4px;">
+        <p class="quick-login-title" style="font-weight:700; color:#131b2e; margin-bottom:8px;">🏢 Giriş Yapacağınız Birimi Seçiniz (Şifrenizi Kendiniz Giriniz):</p>
+        <div class="quick-login-pills" style="display:grid; grid-template-columns:repeat(2, 1fr); gap:6px;">
+          <button type="button" class="pill-btn" onclick="fillLogin('baskan', 'Belediye Başkanı')">👔 Başkanlık Makamı</button>
+          <button type="button" class="pill-btn" onclick="fillLogin('sekreter', 'Özel Kalem Sorumlusu')">✒️ Özel Kalem & Sekreterya</button>
+          <button type="button" class="pill-btn" onclick="fillLogin('yaziisleri', 'Yazı İşleri Müdürü')">📜 Yazı İşleri Müdürlüğü</button>
+          <button type="button" class="pill-btn" onclick="fillLogin('fenisleri', 'Fen İşleri Müdürü')">🚜 Fen İşleri Müdürlüğü</button>
+          <button type="button" class="pill-btn" onclick="fillLogin('zabita', 'Zabıta Amiri')">👮 Zabıta Amirliği</button>
+          <button type="button" class="pill-btn" onclick="fillLogin('muhasebe', 'Mali Hizmetler Müdürü')">💰 Mali Hizmetler / Muhasebe</button>
+          <button type="button" class="pill-btn" onclick="fillLogin('imar', 'İmar ve Şehircilik Müdürü')">🏗️ İmar ve Şehircilik</button>
+          <button type="button" class="pill-btn" onclick="fillLogin('parkbahceler', 'Park ve Bahçeler Sorumlusu')">🌳 Park Bahçeler & Temizlik</button>
+          <button type="button" class="pill-btn" onclick="fillLogin('kultur', 'Kültür ve Sosyal İşler Sorumlusu')">🎭 Kültür ve Sosyal İşler</button>
+          <button type="button" class="pill-btn" onclick="fillLogin('admin', 'Sistem Yöneticisi')">👑 Sistem Yöneticisi (Admin)</button>
+        </div>
+      </div>
+
+      <form id="form-login" class="login-form">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div class="form-group">
+            <label for="login-username">Birim Kullanıcı Adı *</label>
+            <input type="text" id="login-username" required placeholder="Örn: zabita / fenisleri">
+          </div>
+          <div class="form-group">
+            <label for="login-password">Birim Şifresi *</label>
+            <input type="password" id="login-password" required placeholder="Birim şifrenizi giriniz">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="login-personnel-name">👤 Giriş Yapan Personel Adı Soyadı & Ünvanı *</label>
+          <input type="text" id="login-personnel-name" required placeholder="Örn: Ahmet Yılmaz (Zabıta Amiri / Fen İşleri Md.)">
+          <small style="font-size:0.74rem; color:#64748b; display:block; margin-top:3px;">Hangi personelin işlem yaptığının bilinmesi için ad soyad ve ünvan giriniz.</small>
+        </div>
+
+        <p id="login-error-msg" class="login-error hidden">Hatalı kullanıcı adı veya şifre!</p>
+
+        <button type="submit" class="btn btn-primary btn-lg btn-block">🔓 Oturum Aç ve Panele Gir</button>
+      </form>
+
+      <div class="login-lan-box" style="margin-top:12px; background:#e0f2fe; border:1px solid #7dd3fc; padding:8px 12px; border-radius:8px; text-align:center;">
+        <span style="font-size:0.78rem; color:#0369a1; font-weight:700;">🌐 Yerel Ağ / Bulut Bağlantı Adresi:</span>
+        <div style="font-family:monospace; font-weight:800; color:#0b1c30; font-size:0.92rem; margin-top:2px;" id="login-lan-url">http://192.168.1.73:3500</div>
+        <button type="button" class="btn-sm btn-secondary" style="margin-top:6px; font-size:0.74rem; padding:3px 10px;" onclick="document.getElementById('login-cloud-setup-box').classList.toggle('hidden')">
+          ☁️ Ana Bilgisayar Kapalıyken (GitHub Bulut Modu) Bağlantı Ayarı
+        </button>
+        <div id="login-cloud-setup-box" class="hidden" style="margin-top:8px; text-align:left; background:#ffffff; padding:10px; border-radius:6px; border:1px solid #bae6fd;">
+          <small style="display:block; color:#0369a1; font-weight:700; margin-bottom:6px;">GitHub Pages veya Bağımsız Tarayıcı Üzerinden Doğrudan Bulut Veritabanına Bağlan:</small>
+          <input type="password" id="login-cloud-token" placeholder="GitHub Token (ghp_...)" style="width:100%; margin-bottom:5px; padding:5px 8px; font-size:0.78rem; border:1px solid #cbd5e1; border-radius:4px;">
+          <input type="text" id="login-cloud-gist" placeholder="GitHub Gist ID" style="width:100%; margin-bottom:5px; padding:5px 8px; font-size:0.78rem; border:1px solid #cbd5e1; border-radius:4px;">
+          <input type="password" id="login-cloud-key" value="ELDIVAN-BLD-2026-GIZLI-ANAHTAR" placeholder="AES-256 Kurum Gizlilik Şifresi" style="width:100%; margin-bottom:6px; padding:5px 8px; font-size:0.78rem; border:1px solid #cbd5e1; border-radius:4px;">
+          <button type="button" class="btn btn-sm btn-primary btn-block" onclick="saveLoginCloudConfig()">💾 Bulut Bağlantısını Bu Cihaza Kaydet</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN APPLICATION CONTAINER -->
+  <div class="app-container hidden" id="app-main-container">
+    
+    <!-- LIVE TOAST POPUP CONTAINER -->
+    <div id="live-toast-container" class="live-toast-container"></div>
+    
+    <!-- Top Header -->
+    <header class="app-header">
+      <div class="header-branding">
+        <div class="logo-wrapper">
+          <img src="icon.png" alt="Eldivan Belediye Logo" class="app-logo">
+        </div>
+        <div class="title-wrapper">
+          <span class="sub-subtitle" id="header-top-subtitle">T.C. ELDİVAN BELEDİYE BAŞKANLIĞI — KURUMSAL PORTAL v4.0</span>
+          <h1 class="main-title" id="header-main-title">Başkanlık, Özel Kalem & Birimler Yönetim Sistemi</h1>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <!-- Active User Profile Card -->
+        <div class="user-profile-card">
+          <span class="user-avatar">👤</span>
+          <div class="user-info-text">
+            <span id="active-user-name" class="user-name">Giriş Yapılmadı</span>
+            <span id="active-user-role-badge" class="user-role">--</span>
+          </div>
+          <button id="btn-logout" class="btn btn-sm btn-secondary" title="Oturumu Kapat">
+            🚪 Çıkış
+          </button>
+        </div>
+
+        <!-- LAN Server Badge -->
+        <div class="lan-server-badge" id="lan-server-badge">
+          🌐 Ağ: <span id="lan-url">http://127.0.0.1:3500</span>
+        </div>
+
+        <!-- Live Cloud Sync Badge -->
+        <div class="lan-server-badge" id="cloud-status-badge" style="cursor:pointer; background:#f0fdf4; border:1px solid #86efac; color:#166534;" onclick="document.querySelector('[data-tab=\'tab-settings\']').click()" title="GitHub Online Bulut Veritabanı Ayarları">
+          ☁️ Bulut: <span id="header-cloud-status-text">Yapılandır</span>
+        </div>
+
+        <!-- Live Clock -->
+        <div class="live-clock-card">
+          <div class="clock-icon">🕒</div>
+          <div class="clock-details">
+            <span id="live-time">00:00:00</span>
+            <span id="live-date">-- ---- ----</span>
+          </div>
+        </div>
+
+        <!-- Header Actions -->
+        <div class="header-actions">
+          <button id="btn-sound-toggle" class="btn btn-secondary" title="Sesli Bildirimleri Aç/Kapat">🔔 Ses Açık</button>
+          <button id="btn-print" class="btn btn-secondary">🖨️ Rapor</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="nav-bar">
+      <div class="nav-tabs">
+        <button class="nav-tab active" data-tab="tab-baskanlik-paneli" id="nav-btn-role-hub">
+          🏛️ Başkanlık & Özel Kalem Paneli
+        </button>
+        <button class="nav-tab" data-tab="tab-daily">
+          📅 Günlük Özet Pano
+        </button>
+        <button class="nav-tab" data-tab="tab-mayor-schedule">
+          👔 Başkan Programı
+        </button>
+        <button class="nav-tab" data-tab="tab-documents-appointments">
+          📄 Evrak & Randevular <span id="badge-doc-count" class="tab-badge">0</span>
+        </button>
+        <button class="nav-tab" data-tab="tab-archive">
+          📂 Geçmiş Görüşmeler & İşler Arşivi
+        </button>
+        <button class="nav-tab" data-tab="tab-unit-tasks">
+          📢 Birim Görevleri & Bildirimler <span id="badge-unit-tasks" class="tab-badge warning">0</span>
+        </button>
+        <button class="nav-tab" data-tab="tab-chat">
+          💬 Birimler Arası İletişim <span id="badge-chat-count" class="tab-badge info">0</span>
+        </button>
+        <button class="nav-tab" data-tab="tab-ai-assistant">
+          🤖 Yapay Zeka Denetçisi <span id="badge-ai-count" class="tab-badge danger hidden">!</span>
+        </button>
+        <button class="nav-tab" data-tab="tab-monthly">
+          🗓️ Aylık Görünüm
+        </button>
+        <button class="nav-tab" data-tab="tab-yearly">
+          📊 Yıllık Görünüm
+        </button>
+        <button class="nav-tab" data-tab="tab-audit-logs">
+          📋 Denetim Logları
+        </button>
+        <button class="nav-tab" data-tab="tab-settings">
+          ⚙️ Ayarlar
+        </button>
+      </div>
+
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="global-search" placeholder="Arama (Zabıta, Evrak No, Randevu...)">
+      </div>
+    </nav>
+
+    <!-- Main Content Panes -->
+    <main class="main-content">
+      
+      <!-- CANLI MAKAM KOKPİTİ VE ÖZEL KALEM OPERASYON MASASI BARI -->
+      <div id="makam-cockpit-banner" class="makam-cockpit-card">
+        <div class="makam-top-row">
+          <div class="makam-info-left">
+            <div class="makam-badge-group">
+              <span class="pulse-indicator" id="makam-status-dot"></span>
+              <span class="makam-status-text" id="makam-status-title">BAŞKAN MAKAMDA (Kabul Açık)</span>
+              <span class="kamunet-tag"><span class="material-symbols-outlined" style="font-size:14px; vertical-align:middle;">verified_user</span> KamuNet 256-Bit SSL Kapalı Devre</span>
+            </div>
+            <div class="makam-guest-details">
+              <span class="guest-title">Şu Anda Makamda:</span>
+              <strong id="makam-guest-name">Ahmet Yılmaz</strong>
+              <span id="makam-guest-title" class="guest-sub">(Çiftçi Temsilcisi — Çay Mahallesi)</span>
+              <span class="timer-badge"><span class="material-symbols-outlined" style="font-size:14px; vertical-align:middle;">timer</span> <span id="makam-guest-timer">14 dk</span></span>
+              <span class="waiting-badge"><span class="material-symbols-outlined" style="font-size:14px; vertical-align:middle;">chair</span> Bekleme Salonu: <strong id="makam-waiting-count">2 Kişi Bekliyor</strong></span>
+            </div>
+          </div>
+
+          <!-- CONTROL ACTIONS FOR MAKAM & SECRETARIAT -->
+          <div class="makam-actions-right" id="makam-controls-group">
+            <button class="btn btn-primary" id="btn-next-guest" onclick="takeNextGuest()">
+              <span class="material-symbols-outlined">how_to_reg</span>
+              <span>Görüşmeyi Tamamla &amp; Sıradakini Al</span>
+            </button>
+            <button class="btn btn-accent" id="btn-ring-bell" onclick="ringMakamBell()">
+              <span class="material-symbols-outlined">notifications_active</span>
+              <span>Makam Zilini Çal</span>
+            </button>
+            <button class="btn btn-secondary" id="btn-busy-mode" onclick="toggleBusyMode()">
+              <span class="material-symbols-outlined">do_not_disturb_on</span>
+              <span>Kısa Ara / Meşgule Al</span>
+            </button>
+            <button class="btn btn-secondary btn-danger-outline" id="btn-clear-room" onclick="clearMakamRoom()">
+              <span class="material-symbols-outlined">door_front</span>
+              <span>Makamı Boşalt</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- MAKAM MODE STATUS BUTTON GROUP FOR SECRETARIAT/MAYOR -->
+        <div class="makam-mode-selector" id="makam-mode-selector">
+          <span class="mode-label">Makam Kabul Modu:</span>
+          <button class="mode-btn active" data-status="kabul-acik" onclick="setMayorStatus('kabul-acik')">🟢 Makamda (Kabul Açık)</button>
+          <button class="mode-btn" data-status="toplantida" onclick="setMayorStatus('toplantida')">🟡 Toplantıda</button>
+          <button class="mode-btn" data-status="ilce-disinda" onclick="setMayorStatus('ilce-disinda')">🟠 İlçe Dışında</button>
+          <button class="mode-btn" data-status="kapali" onclick="setMayorStatus('kapali')">🔴 Meşgul / Kapalı</button>
+        </div>
+      </div>
+
+      <!-- TAB 0: BAŞKANLIK PANELİ / ÖZEL KALEM PANELİ / KURUM İÇİ BİRİM ÖZEL PANELİ -->
+      <section id="tab-baskanlik-paneli" class="tab-pane active">
+        
+        <!-- A) BAŞKANLIK VE ÖZEL KALEM OPERASYON PANELİ (SADE, ANLAŞILIR, KOLAY) -->
+        <div id="executive-hub-container">
+          <!-- Üst 4'lü Sade Durum Kartları -->
+          <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:14px; margin-bottom:18px;">
+            <div class="card" style="border-left:5px solid #0284c7; padding:14px 16px;">
+              <div style="font-size:0.78rem; font-weight:700; color:#64748b; text-transform:uppercase;">🪑 Bekleme Salonu</div>
+              <div style="font-size:1.65rem; font-weight:800; color:#131b2e; margin:4px 0;" id="hub-stat-waiting-total">0 Kişi</div>
+              <div style="font-size:0.75rem; color:#475569;" id="hub-stat-waiting-breakdown">Randevulu: 0 • Randevusuz: 0 • Kurum: 0 • Personel: 0</div>
+            </div>
+            <div class="card" style="border-left:5px solid #d97706; padding:14px 16px;">
+              <div style="font-size:0.78rem; font-weight:700; color:#64748b; text-transform:uppercase;">🤝 Randevu & Görüşme Talepleri</div>
+              <div style="font-size:1.65rem; font-weight:800; color:#9b4500; margin:4px 0;" id="hub-stat-appnt-pending">0 Talep</div>
+              <div style="font-size:0.75rem; color:#475569;" id="hub-stat-appnt-sub">Saat ve gün belirterek onay bekleyenler</div>
+            </div>
+            <div class="card" style="border-left:5px solid #dc2626; padding:14px 16px;">
+              <div style="font-size:0.78rem; font-weight:700; color:#64748b; text-transform:uppercase;">✒️ Bekleyen İmzalar</div>
+              <div style="font-size:1.65rem; font-weight:800; color:#dc2626; margin:4px 0;" id="hub-stat-sign-total">0 İmza</div>
+              <div style="font-size:0.75rem; color:#475569;" id="hub-stat-sign-breakdown">🔏 Islak İmza: 0 • 💻 E-İmza: 0 (🔴 Acil: 0)</div>
+            </div>
+            <div class="card" style="border-left:5px solid #059669; padding:14px 16px;">
+              <div style="font-size:0.78rem; font-weight:700; color:#64748b; text-transform:uppercase;">👔 Bugünkü Başkan Programı</div>
+              <div style="font-size:1.65rem; font-weight:800; color:#059669; margin:4px 0;" id="hub-stat-mayor-today">0 Program</div>
+              <div style="display:flex; gap:6px; margin-top:4px;">
+                <button class="btn-sm btn-secondary" style="font-size:0.7rem; padding:3px 8px;" onclick="document.querySelector('[data-tab=\'tab-monthly\']').click()">🗓️ Aylık Takvim</button>
+                <button class="btn-sm btn-secondary" style="font-size:0.7rem; padding:3px 8px;" onclick="document.querySelector('[data-tab=\'tab-yearly\']').click()">📊 Yıllık Takvim</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ana İki Sütunlu Sade Operasyon Alanı -->
+          <div style="display:grid; grid-template-columns:1.15fr 1fr; gap:18px;">
+            
+            <!-- SOL SÜTUN: 1) BEKLEME SALONU TAKİBİ & ÖNCELİK SIRASI  2) RANDEVU TALEPLERİ (GÜN/SAAT BELİRTEREK ONAY/RED) -->
+            <div style="display:flex; flex-direction:column; gap:18px;">
+              
+              <!-- KART 1: BEKLEME SALONU TAKİBİ -->
+              <div class="card">
+                <div class="card-header" style="flex-wrap:wrap; gap:8px;">
+                  <div>
+                    <h2>🪑 Bekleme Salonu Takibi & Öncelik Sırası</h2>
+                    <p style="font-size:0.8rem; color:var(--text-muted);">Randevulu, Randevusuz Vatandaş, Kurum/Meclis Üyesi ve Personel ayrımı & önceliklendirme</p>
+                  </div>
+                  <button class="btn btn-sm btn-primary" onclick="openWaitingRoomAddModal()">+ Bekleme Salonuna Ekle</button>
+                </div>
+
+                <!-- Bekleme Salonu Kategori Filtreleri -->
+                <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px;">
+                  <button class="cat-pill active" onclick="filterWaitingRoom('all', this)">Tümü</button>
+                  <button class="cat-pill" onclick="filterWaitingRoom('Kurum / Protokol', this)">🏛️ Kurum / Meclis Üyesi</button>
+                  <button class="cat-pill" onclick="filterWaitingRoom('Randevulu', this)">🤝 Randevulu</button>
+                  <button class="cat-pill" onclick="filterWaitingRoom('Randevusuz', this)">🚶 Randevusuz Vatandaş</button>
+                  <button class="cat-pill" onclick="filterWaitingRoom('Personel', this)">👷 Belediye Personeli</button>
+                </div>
+
+                <div id="hub-waiting-room-list" class="summary-list"></div>
+              </div>
+
+              <!-- KART 2: RANDEVU & GÖRÜŞME TALEPLERİ (SAAT VE GÜN BELİRTEREK ONAYLAMA / REDDETME) -->
+              <div class="card">
+                <div class="card-header" style="flex-wrap:wrap; gap:8px;">
+                  <div>
+                    <h2>🤝 Randevu & Görüşme Talepleri (Saat / Gün Belirterek Onayla)</h2>
+                    <p style="font-size:0.8rem; color:var(--text-muted);">Gelen randevu ve birim görüşme taleplerini gün ve saat belirterek onaylayın veya reddedin</p>
+                  </div>
+                  <button class="btn btn-sm btn-primary" onclick="openNewAppointmentModal()">+ Yeni Randevu / Talep Gir</button>
+                </div>
+                <div id="hub-appointment-requests-list" class="summary-list"></div>
+              </div>
+
+            </div>
+
+            <!-- SAĞ SÜTUN: 3) BEKLEYEN İMZALAR (ISLAK İMZA / E-İMZA & ACİL / NORMAL)  4) GÜNLÜK PROGRAM -->
+            <div style="display:flex; flex-direction:column; gap:18px;">
+              
+              <!-- KART 3: BEKLEYEN İMZALAR -->
+              <div class="card">
+                <div class="card-header" style="flex-wrap:wrap; gap:8px;">
+                  <div>
+                    <h2>✒️ Bekleyen İmzalar (Islak İmza & E-İmza)</h2>
+                    <p style="font-size:0.8rem; color:var(--text-muted);">Aciliyet durumuna ve imza türüne göre sınıflandırılmış imzalar (Opsiyonel İmzalandı / Reddet)</p>
+                  </div>
+                  <button class="btn btn-sm btn-primary" onclick="openSignatureModal()">+ Yeni İmza Girişi</button>
+                </div>
+
+                <!-- İmza Türü ve Aciliyet Filtreleri -->
+                <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px;">
+                  <button class="cat-pill active" onclick="filterHubSignatures('all', this)">Tümü</button>
+                  <button class="cat-pill" onclick="filterHubSignatures('islak', this)">🔏 Islak İmza</button>
+                  <button class="cat-pill" onclick="filterHubSignatures('e-imza', this)">💻 E-İmza</button>
+                  <button class="cat-pill" onclick="filterHubSignatures('acil', this)">🔴 Acil</button>
+                  <button class="cat-pill" onclick="filterHubSignatures('normal', this)">🔵 Normal / Süreli</button>
+                </div>
+
+                <div id="hub-signatures-list" class="summary-list"></div>
+              </div>
+
+              <!-- KART 4: GÜNLÜK BAŞKAN PROGRAMI & TAKVİM BİLGİSİ -->
+              <div class="card">
+                <div class="card-header" style="flex-wrap:wrap; gap:8px;">
+                  <div>
+                    <h2>👔 Günlük Program Bilgisi & Ajanda</h2>
+                    <p style="font-size:0.8rem; color:var(--text-muted);" id="hub-today-date-label">Bugünün programı ve onaylı kabuller</p>
+                  </div>
+                  <div style="display:flex; gap:6px;">
+                    <button class="btn btn-sm btn-primary executive-only-btn" onclick="document.getElementById('btn-add-mayor-event').click()">+ Program Ekle</button>
+                    <button class="btn btn-sm btn-secondary" onclick="document.querySelector('[data-tab=\'tab-mayor-schedule\']').click()">Tüm Program / JPEG</button>
+                  </div>
+                </div>
+                <div id="hub-daily-schedule-list" class="summary-list"></div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <!-- B) KURUM İÇİ BİRİMLERE ÖZEL ARAYÜZ (ZABITA, FEN İŞLERİ, YAZI İŞLERİ, MUHASEBE, İMAR VB.) -->
+        <div id="unit-hub-container" class="hidden">
+          <!-- Birim Kimlik & Makam Canlı Durum Bannerı -->
+          <div class="card" style="background:linear-gradient(135deg, #131b2e, #1e293b); color:#fff; margin-bottom:18px; padding:18px 22px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;">
+              <div>
+                <span style="background:#d97706; color:#fff; padding:4px 10px; border-radius:999px; font-size:0.75rem; font-weight:800; letter-spacing:0.5px;">🏢 KURUM İÇİ BİRİM ÖZEL PANELİ</span>
+                <h2 style="color:#fff; font-size:1.35rem; margin:8px 0 4px 0;" id="unit-hub-title">Müdürlük Operasyon Masası</h2>
+                <p style="color:#cbd5e1; font-size:0.88rem; margin:0;" id="unit-hub-personnel-identity">👤 İşlem Yapan Personel: --</p>
+              </div>
+              <!-- Makam Durumu Özeti (Kim var, kaç kişi bekliyor, müsaitlik) -->
+              <div style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.18); border-radius:10px; padding:12px 16px; min-width:300px;">
+                <div style="font-size:0.76rem; color:#94a3b8; font-weight:700; text-transform:uppercase; margin-bottom:4px;">🏛️ Canlı Makam Durumu & Müsaitlik</div>
+                <div style="font-size:1rem; font-weight:800; color:#34d399;" id="unit-hub-makam-status">BAŞKAN MAKAMDA (Kabul Açık)</div>
+                <div style="font-size:0.82rem; color:#e2e8f0; margin-top:4px;" id="unit-hub-makam-guest">İçeride: -- • Bekleyen: 0 Kişi</div>
+              </div>
+            </div>
+            <!-- Hızlı Birim Aksiyon Butonları -->
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.12);">
+              <button class="btn btn-primary" onclick="openSignatureModal()">✒️ Makama Yeni İmza Sun (Islak / E-İmza)</button>
+              <button class="btn btn-accent" onclick="openUnitMeetingRequestModal()">🗣️ Başkanla Görüşme Talebi Gönder (Acil / Normal)</button>
+              <button class="btn btn-secondary" style="background:rgba(255,255,255,0.14); color:#fff; border-color:transparent;" onclick="document.querySelector('[data-tab=\'tab-mayor-schedule\']').click()">👔 Başkan Programı</button>
+              <button class="btn btn-secondary" style="background:rgba(255,255,255,0.14); color:#fff; border-color:transparent;" onclick="document.querySelector('[data-tab=\'tab-monthly\']').click()">🗓️ Aylık & Yıllık Takvim</button>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1.15fr 1fr; gap:18px;">
+            <!-- Sol: Birimin Sunduğu İmzalar (Sorumluluk Birimde - İmzalandı Girdisi Verebilme) -->
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h2>✒️ Birimimizin Sunduğu İmzalar (Sorumluluk & Takip)</h2>
+                  <p style="font-size:0.8rem; color:var(--text-muted);">Sunduğunuz imzanın genel sorumluluğu biriminizdedir. İmzalandıysa "İmzalandı" girdisi verebilirsiniz.</p>
+                </div>
+                <button class="btn btn-sm btn-primary" onclick="openSignatureModal()">+ İmza Girişi Yap</button>
+              </div>
+              <div id="unit-hub-signatures-list" class="summary-list"></div>
+            </div>
+
+            <!-- Sağ: Birim Görüşme Talepleri, Başkan Programı & Birim Görevleri -->
+            <div style="display:flex; flex-direction:column; gap:18px;">
+              <div class="card">
+                <div class="card-header">
+                  <div>
+                    <h2>🗣️ Başkanla Görüşme Taleplerimiz & Bekleme Durumu</h2>
+                    <p style="font-size:0.8rem; color:var(--text-muted);">Birim personeli tarafından iletilen görüşme ve randevu talepleri</p>
+                  </div>
+                  <button class="btn btn-sm btn-accent" onclick="openUnitMeetingRequestModal()">+ Görüşme Talep Et</button>
+                </div>
+                <div id="unit-hub-meetings-list" class="summary-list"></div>
+              </div>
+
+              <div class="card">
+                <div class="card-header">
+                  <div>
+                    <h2>👔 Bugünkü Başkan Programı & Birim Görevlerimiz</h2>
+                  </div>
+                </div>
+                <div id="unit-hub-schedule-list" class="summary-list"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- TAB 1: GÜNLÜK GÖRÜNÜM (360 EXECUTIVE COMMAND DASHBOARD) -->
+      <section id="tab-daily" class="tab-pane">
+        
+        <div id="daily-access-restricted-notice" class="card hidden" style="border-left:4px solid var(--color-accent); margin-bottom:16px;">
+          <h3 style="color:var(--color-accent);">🔒 Özel Kalem & Başkanlık Programı Kısıtlı Modu</h3>
+          <p style="font-size:0.88rem; color:var(--text-muted); margin-top:4px;">Giriş yaptığınız rol gereği genel takvim ve görevleri görüntülüyorsunuz. Başkanlık özel kabulleri sekreterya erişimine özeldir.</p>
+        </div>
+
+        <div class="daily-grid">
+          
+          <!-- Left Column -->
+          <div class="left-daily-col">
+            <!-- Date Hero Card -->
+            <div class="card date-hero-card">
+              <div class="hero-top">
+                <span class="hero-season-badge" id="hero-season">🍂 Sonbahar</span>
+                <span class="hero-hijri-badge" id="hero-hijri">Hicri Takvim Eşlenikli</span>
+              </div>
+              <div class="hero-body">
+                <div class="hero-day-number" id="hero-day-num">02</div>
+                <div class="hero-month-year">
+                  <span class="hero-month-name" id="hero-month-name">Ekim</span>
+                  <span class="hero-year-num" id="hero-year-num">2026</span>
+                  <span class="hero-weekday-name" id="hero-weekday-name">Cuma</span>
+                </div>
+              </div>
+              <div class="hero-footer">
+                <button id="btn-daily-prev" class="btn-icon">◀ Önceki Gün</button>
+                <button id="btn-daily-today" class="btn-sm btn-primary">Bugün</button>
+                <button id="btn-daily-next" class="btn-icon">Sonraki Gün ▶</button>
+              </div>
+            </div>
+
+            <!-- Today Stats Summary Widget -->
+            <div class="card today-stats-widget" style="margin-top:16px;">
+              <div class="card-header" style="margin-bottom:8px;">
+                <h2 style="font-size:0.95rem;">📊 Günün İstatistiki Özeti</h2>
+              </div>
+              <div class="stats-pills-grid">
+                <div class="stat-pill"><span class="stat-val" id="stat-mayor-count">0</span><span class="stat-lbl">Program</span></div>
+                <div class="stat-pill"><span class="stat-val" id="stat-appnt-count">0</span><span class="stat-lbl">Randevu</span></div>
+                <div class="stat-pill"><span class="stat-val" id="stat-doc-count">0</span><span class="stat-lbl">Evrak</span></div>
+                <div class="stat-pill"><span class="stat-val" id="stat-task-count">0</span><span class="stat-lbl">Görev</span></div>
+              </div>
+            </div>
+
+            <!-- Upcoming 7 Days Card -->
+            <div class="card upcoming-card" style="margin-top:16px;">
+              <div class="card-header">
+                <h2>⏳ Önümüzdeki 7 Günün Önemli Günleri</h2>
+              </div>
+              <div id="upcoming-days-list" class="upcoming-list"></div>
+            </div>
+          </div>
+
+          <!-- Right Column: 360-Degree Executive Summaries -->
+          <div class="right-daily-col" style="display:flex; flex-direction:column; gap:16px;">
+            
+            <!-- SECTION A: Today's Mayor Schedule Summary -->
+            <div class="card daily-summary-section">
+              <div class="card-header">
+                <h2>👔 Seçili Günün Başkanlık Programı & Ajandası</h2>
+                <button class="btn-sm btn-primary executive-only-btn" onclick="document.querySelector('[data-tab=\'tab-mayor-schedule\']').click()">+ Program Yönet</button>
+              </div>
+              <div id="daily-summary-mayor-list" class="summary-list"></div>
+            </div>
+
+            <!-- SECTION B: Today's Visitor Appointments Summary -->
+            <div class="card daily-summary-section">
+              <div class="card-header">
+                <h2>🤝 Seçili Günün Ziyaretçi & Randevu Listesi</h2>
+                <button class="btn-sm btn-primary" onclick="document.querySelector('[data-tab=\'tab-documents-appointments\']').click()">+ Randevuları Gör</button>
+              </div>
+              <div id="daily-summary-appnt-list" class="summary-list"></div>
+            </div>
+
+            <!-- SECTION C: Today's Pending Documents Summary -->
+            <div class="card daily-summary-section">
+              <div class="card-header">
+                <h2>📄 Seçili Günün Acil & Süreli Evrakları</h2>
+                <button class="btn-sm btn-primary" onclick="document.querySelector('[data-tab=\'tab-documents-appointments\']').click()">+ Evrakları Gör</button>
+              </div>
+              <div id="daily-summary-doc-list" class="summary-list"></div>
+            </div>
+
+            <!-- SECTION D: Today's Unit Tasks Summary -->
+            <div class="card daily-summary-section">
+              <div class="card-header">
+                <h2>📢 Seçili Günün Birim Görevleri & Çalışmaları</h2>
+                <button class="btn-sm btn-primary" onclick="document.querySelector('[data-tab=\'tab-unit-tasks\']').click()">+ Birim Görevleri</button>
+              </div>
+              <div id="daily-summary-task-list" class="summary-list"></div>
+            </div>
+
+            <!-- SECTION E: Official Important Days & Weeks -->
+            <div class="card active-days-card">
+              <div class="card-header">
+                <h2>📌 Seçili Günde Bulunan Önemli Günler ve Haftalar</h2>
+                <span class="badge badge-info" id="active-count-badge">0 Etkinlik</span>
+              </div>
+              <div id="active-days-list" class="active-days-list"></div>
+            </div>
+
+            <!-- SECTION F: Municipal Daily Notes Checklist -->
+            <div class="card municipal-tasks-card">
+              <div class="card-header">
+                <h2>📋 Eldivan Belediyesi Basın & Özel Kalem Günlük Notları</h2>
+                <button id="btn-add-quick-note" class="btn-sm btn-secondary">+ Not Ekle</button>
+              </div>
+              <div class="task-input-row">
+                <input type="text" id="input-task-text" placeholder="Bugün yapılacak belediye duyurusu veya not ekle...">
+                <button id="btn-save-task" class="btn-sm btn-primary">Ekle</button>
+              </div>
+              <ul id="task-list" class="task-list"></ul>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- TAB 2: BAŞKAN PROGRAMI & JPEG EXPORT -->
+      <section id="tab-mayor-schedule" class="tab-pane">
+        <div class="card shadow-lg">
+          <div class="card-header">
+            <div>
+              <h2>👔 Eldivan Belediye Başkanı Günlük ve Haftalık Programı</h2>
+              <p>Başkanlık Makamı Kabul, Ziyaret, Meclis ve Saha İnceleme Ajandası</p>
+            </div>
+            <div style="display:flex; gap:10px;">
+              <button id="btn-export-mayor-jpg" class="btn btn-accent">
+                🖼️ Görsel (JPEG) Olarak Dışa Aktar
+              </button>
+              <button id="btn-add-mayor-event" class="btn btn-primary executive-only-btn">+ Başkanlık Programı Ekle</button>
+            </div>
+          </div>
+
+          <div class="mayor-agenda-container">
+            <div class="mayor-date-selector">
+              <input type="date" id="mayor-filter-date" class="date-picker-input">
+              <button id="btn-mayor-today" class="btn btn-secondary">Bugünün Programı</button>
+            </div>
+
+            <div id="mayor-schedule-list" class="mayor-schedule-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: EVRAK & RANDEVULAR -->
+      <section id="tab-documents-appointments" class="tab-pane">
+        <div class="docs-appnts-grid">
+          
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2>📄 Bekleyen Resmi Evrak Takibi</h2>
+                <p>Aciliyet durumlarına göre süreli evraklar (Tamamlanınca arşive taşınır)</p>
+              </div>
+              <button id="btn-add-doc" class="btn btn-sm btn-primary">+ Yeni Evrak Kaydı</button>
+            </div>
+            <div id="documents-list" class="docs-list"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2>🤝 Ziyaretçi & Başkanlık Randevuları</h2>
+                <p>Vatandaş ve heyet kabul randevuları (Onaylanınca arşive taşınır)</p>
+              </div>
+              <button id="btn-add-appnt" class="btn btn-sm btn-primary">+ Yeni Randevu Ekle</button>
+            </div>
+            <div id="appointments-list" class="appnts-list"></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- TAB 4: GEÇMİŞ GÖRÜŞMELER & İŞLER ARŞİVİ -->
+      <section id="tab-archive" class="tab-pane">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h2>📂 Geçmiş Görüşmeler ve Tamamlanan İşler Arşivi</h2>
+              <p>Geçmişte kimin geldiği, hangi evrakların tamamlandığı ve alınan kararların geçmiş kaydı</p>
+            </div>
+            <div class="archive-filter-bar">
+              <input type="text" id="archive-search-input" class="select-input" placeholder="Ziyaretçi veya evrak ara...">
+            </div>
+          </div>
+
+          <div class="archive-sub-tabs">
+            <button class="archive-sub-btn active" id="btn-arch-sub-appnt">🤝 Geçmiş Ziyaretçi Görüşmeleri</button>
+            <button class="archive-sub-btn" id="btn-arch-sub-doc">📄 Tamamlanan Evrak Arşivi</button>
+          </div>
+
+          <div id="archive-content-list" class="archive-list-container"></div>
+        </div>
+      </section>
+
+      <!-- TAB 5: BİRİM GÖREVLERİ -->
+      <section id="tab-unit-tasks" class="tab-pane">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h2>📢 Birim Görev Atama & Anlık Bildirim Paneli</h2>
+              <p>Yönetici tarafından atanan görevler</p>
+            </div>
+            <button id="btn-add-unit-task" class="btn btn-primary executive-only-btn">+ Birime Görev Ata</button>
+          </div>
+
+          <div class="unit-tasks-filter-bar">
+            <span>Birim Filtresi:</span>
+            <select id="unit-filter-select" class="select-input">
+              <option value="all">Tüm Birimler</option>
+              <option value="yazi_isleri">📜 Yazı İşleri Müdürlüğü</option>
+              <option value="fen_isleri">🚜 Fen İşleri Müdürlüğü</option>
+              <option value="muhasebe">💰 Mali Hizmetler / Muhasebe</option>
+              <option value="zabita">👮 Zabıta Amirliği</option>
+              <option value="imar">🏗️ İmar ve Şehircilik Müdürlüğü</option>
+              <option value="park_bahceler">🌳 Park Bahçeler & Temizlik</option>
+              <option value="kultur">🎭 Kültür ve Sosyal İşler</option>
+              <option value="sekreterya">✒️ Özel Kalem / Sekreterya</option>
+            </select>
+          </div>
+
+          <div id="unit-tasks-list" class="unit-tasks-grid"></div>
+        </div>
+      </section>
+
+      <!-- TAB 6: AYLIK GÖRÜNÜM -->
+      <section id="tab-monthly" class="tab-pane">
+        <div class="monthly-header">
+          <div class="month-controls">
+            <button id="btn-month-prev" class="btn btn-secondary">◀ Önceki Ay</button>
+            <h2 id="monthly-title">Ekim 2026</h2>
+            <button id="btn-month-next" class="btn btn-secondary">Sonraki Ay ▶</button>
+            <button id="btn-month-today" class="btn btn-primary">Bugün</button>
+          </div>
+          <div class="category-filters" id="category-filters">
+            <button class="cat-pill active" data-cat="all">Tümü</button>
+            <button class="cat-pill" data-cat="belediye" style="--cat-color: #0284c7;">🏛️ Belediyecilik</button>
+            <button class="cat-pill" data-cat="milli" style="--cat-color: #dc2626;">🇹🇷 Resmi/Milli</button>
+            <button class="cat-pill" data-cat="dini" style="--cat-color: #059669;">🌙 Dini Günler</button>
+            <button class="cat-pill" data-cat="cevre_saglik" style="--cat-color: #16a34a;">🌱 Çevre & Sağlık</button>
+            <button class="cat-pill" data-cat="sosyal_kultur" style="--cat-color: #d97706;">🤝 Sosyal & Kültür</button>
+          </div>
+        </div>
+        <div class="calendar-grid-container">
+          <div class="calendar-weekdays">
+            <div>Pazartesi</div><div>Salı</div><div>Çarşamba</div><div>Perşembe</div><div>Cuma</div><div>Cumartesi</div><div>Pazar</div>
+          </div>
+          <div id="monthly-grid" class="calendar-days-grid"></div>
+        </div>
+      </section>
+
+      <!-- TAB 7: YILLIK GÖRÜNÜM -->
+      <section id="tab-yearly" class="tab-pane">
+        <div class="yearly-header">
+          <div class="year-controls">
+            <button id="btn-year-prev" class="btn btn-secondary">◀ Önceki Yıl</button>
+            <h2 id="yearly-title">2026 Yılı Genel Bakış</h2>
+            <button id="btn-year-next" class="btn btn-secondary">Sonraki Yıl ▶</button>
+          </div>
+        </div>
+        <div id="yearly-grid" class="yearly-grid"></div>
+      </section>
+
+      <!-- TAB 8: AYARLAR -->
+      <section id="tab-settings" class="tab-pane">
+        
+        <!-- ☁️ ÜCRETSİZ VE SÜRESİZ ONLINE VERİTABANI (GITHUB CLOUD DB) KARTI -->
+        <div class="card settings-card" style="border-left:6px solid #059669; margin-bottom:20px;">
+          <div class="card-header" style="flex-wrap:wrap; gap:10px;">
+            <div>
+              <h2>☁️ Ücretsiz & Süresiz Online Bulut Veritabanı (GitHub Cloud DB)</h2>
+              <p>Tüm randevu, imza, bekleme salonu ve program verilerini 7/24 kesintisiz, ücretsiz ve süresiz olarak GitHub bulutunda saklar ve cihazlar arası senkronize eder.</p>
+            </div>
+            <div style="display:flex; gap:8px; align-items:center;">
+              <span id="cloud-settings-status-pill" class="status-pill bekliyor">⚪ Bulut Pasif</span>
+              <button type="button" class="btn btn-sm btn-primary" style="background:#059669;" onclick="triggerManualCloudPush()">🔄 Şimdi Buluta Kaydet</button>
+              <button type="button" class="btn btn-sm btn-secondary" style="background:#0284c7; color:#fff;" onclick="triggerManualCloudPull()">📥 Buluttan Verileri Çek</button>
+            </div>
+          </div>
+
+          <form id="form-cloud-config" class="form-grid" style="margin-top:12px;">
+            <div class="form-group full-width" style="background:#f0fdf4; border:1px solid #bbf7d0; padding:12px 16px; border-radius:8px; display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <strong style="color:#166534; font-size:0.95rem;">🟢 7/24 Otomatik Canlı Bulut Kayıt (Real-Time Online Sync)</strong>
+                <div style="font-size:0.8rem; color:#15803d;">Aktif edildiğinde yapılan her işlem anında online veritabanına kaydedilir ve 10 saniyede bir diğer cihazlarla eşitlenir.</div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="cloud-cfg-enabled">
+                <span class="slider round"></span>
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>Online Veritabanı Sağlayıcısı (Tamamı Ücretsiz & Süresiz) *</label>
+              <select id="cloud-cfg-provider" class="select-input" onchange="toggleCloudProviderFields()">
+                <option value="github-gist">🐙 GitHub Gist Cloud DB (Önerilen - Tek Tıkla Otomatik Kurulum)</option>
+                <option value="github-repo">📦 GitHub Repository (kullanici/repo) Canlı JSON Veritabanı</option>
+                <option value="custom-url">🔥 Firebase Realtime DB / Özel JSON Cloud URL</option>
+              </select>
+            </div>
+
+            <div class="form-group" id="group-cloud-token">
+              <label>GitHub Personal Access Token (ghp_...) *</label>
+              <input type="password" id="cloud-cfg-token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx">
+            </div>
+
+            <div class="form-group" id="group-cloud-gist">
+              <label>GitHub Gist Veritabanı ID <small style="color:#059669;">(Boş bırakırsanız otomatik oluşturulur!)</small></label>
+              <input type="text" id="cloud-cfg-gist-id" placeholder="Otomatik oluşturulması için boş bırakabilirsiniz">
+            </div>
+
+            <div class="form-group hidden" id="group-cloud-repo">
+              <label>GitHub Repository Adı (kullanici/repo) *</label>
+              <input type="text" id="cloud-cfg-repo" placeholder="Örn: eldivanbelediyesi/baskanlik-veritabani">
+            </div>
+
+            <div class="form-group full-width hidden" id="group-cloud-url">
+              <label>Firebase Realtime DB veya JSON Cloud Endpoint URL *</label>
+              <input type="url" id="cloud-cfg-custom-url" placeholder="Örn: https://eldivan-belediye-default-rtdb.europe-west1.firebasedatabase.app/belediye.json">
+            </div>
+
+            <div class="form-group">
+              <label>🔐 AES-256 Uçtan Uca Kriptolama Anahtarı (Kurum Gizlilik Şifresi) *</label>
+              <input type="password" id="cloud-cfg-encryption-key" value="ELDIVAN-BLD-2026-GIZLI-ANAHTAR" placeholder="Kurum içi özel şifreleme anahtarı">
+              <small style="color:#059669; font-size:0.74rem;">Buluttaki tüm veriler bu anahtarla AES-256-GCM standardında şifrelenir; dışarıdan hiç kimse verileri okuyamaz.</small>
+            </div>
+
+            <div class="form-group full-width">
+              <label style="display:flex; align-items:center; gap:8px; font-size:0.86rem; cursor:pointer;">
+                <input type="checkbox" id="cloud-cfg-git-push"> 📦 Yerel Git deposu bağlıysa her kayıtta otomatik <code>git commit &amp; git push</code> çalıştır
+              </label>
+            </div>
+
+            <div class="form-group full-width" style="background:#f8fafc; border:1px solid #cbd5e1; padding:12px 14px; border-radius:8px; font-size:0.82rem; color:#334155; line-height:1.5;">
+              <strong>💡 30 Saniyede Ücretsiz & Süresiz GitHub Veritabanı Nasıl Bağlanır?</strong><br>
+              1. <a href="https://github.com/settings/tokens/new?scopes=gist,repo&description=Eldivan_Belediye_Bulut_DB" target="_blank" style="color:#0284c7; font-weight:700;">Buraya tıklayarak GitHub Token sayfasını açın</a> (veya GitHub &rarr; Settings &rarr; Developer Settings &rarr; Personal Access Tokens &rarr; Tokens (classic) &rarr; Generate new token).<br>
+              2. Süreyi <strong>"No expiration (Süresiz)"</strong> seçip <code>gist</code> ve <code>repo</code> kutucuklarını işaretleyerek token oluşturun.<br>
+              3. Aldığınız <code>ghp_...</code> kodunu yukarıdaki kutuya yapıştırıp <strong>"⚡ Ayarları Kaydet & Online Veritabanını Başlat"</strong> butonuna basın. Sistem gizli veritabanınızı otomatik kurup 7/24 kayda başlayacaktır!
+            </div>
+
+            <div class="full-width" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; padding-top:6px;">
+              <div style="font-size:0.82rem; color:#475569;">
+                🕒 <strong>Son Online Kayıt:</strong> <span id="cloud-last-sync-text">Henüz senkronize edilmedi</span>
+                <span id="cloud-error-text" style="color:#dc2626; font-weight:700; margin-left:10px;"></span>
+              </div>
+              <button type="submit" class="btn btn-primary">⚡ Ayarları Kaydet & Online Veritabanını Başlat</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card settings-card">
+          <div class="card-header">
+            <h2>⚙️ Kurumsal Ayarlar & Ağ Sunucusu</h2>
+          </div>
+          <div class="settings-list">
+            <div class="setting-item">
+              <div class="setting-info">
+                <h3>🌐 Kurumsal Ortak Ağ Sunucusu (Zero-Installation LAN Web Server)</h3>
+                <p>Diğer belediye bilgisayarlarının web tarayıcılarından (Chrome, Edge) bu sisteme erişmesi için yerel ağ adresi:</p>
+                <div style="background:rgba(15,23,42,0.9); border:1px solid var(--color-primary); padding:10px 14px; border-radius:8px; margin-top:8px; display:inline-block; font-family:monospace; font-size:1.05rem; color:#38bdf8; font-weight:700;">
+                  <span id="settings-lan-url">http://192.168.1.83:3500</span>
+                </div>
+              </div>
+            </div>
+            <div class="setting-item">
+              <div class="setting-info">
+                <h3>🚀 Bilgisayarla Birlikte Açılma (Windows Auto-Start)</h3>
+                <p>Bilgisayar açılışında arka planda sessiz çalışır.</p>
+              </div>
+              <div class="setting-action">
+                <label class="switch">
+                  <input type="checkbox" id="set-autostart" checked>
+                  <span class="slider round"></span>
+                </label>
+              </div>
+            </div>
+            <div class="setting-item">
+              <div class="setting-info">
+                <h3>📌 Kapatıldığında Sistem Tepsisine Küçül</h3>
+                <p>Arka planda çalışmaya devam eder.</p>
+              </div>
+              <div class="setting-action">
+                <label class="switch">
+                  <input type="checkbox" id="set-tray" checked>
+                  <span class="slider round"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- YÖNETİCİ KULLANICI & YETKİ YÖNETİM PANELİ -->
+        <div class="card settings-card executive-only-btn" style="margin-top:20px;">
+          <div class="card-header">
+            <div>
+              <h2>👑 Yönetici Paneli — Kullanıcı Parola & Modül Yetkileri</h2>
+              <p>Tüm birim kullanıcı adlarını ve parolalarını görebilir, değiştirebilir ve modül bazlı erişim yetkileri atayabilirsiniz.</p>
+            </div>
+            <button class="btn btn-primary btn-sm" id="btn-admin-add-user" onclick="openAdminAddUserModal()">+ Yeni Kullanıcı Hesabı Ekle</button>
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Kullanıcı Adı</th>
+                  <th>Personel / Unvan</th>
+                  <th>Parola</th>
+                  <th>Birim / Rol</th>
+                  <th>Modül Yetkileri</th>
+                  <th style="text-align:right;">İşlemler</th>
+                </tr>
+              </thead>
+              <tbody id="admin-users-table-body">
+                <!-- Dynamically rendered Users -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 8: BİRİMLER ARASI İLETİŞİM VE SOHBET -->
+      <section id="tab-chat" class="tab-pane">
+        <div class="chat-layout-container">
+          <!-- Chat Sidebar Channels -->
+          <div class="chat-channels-sidebar">
+            <div class="sidebar-header">
+              <h3>💬 Birim Sohbet Kanalları</h3>
+              <p style="font-size:0.75rem; color:var(--text-muted); margin:4px 0 0 0;">Birim seçerek 1'e 1 özel görüşme yapın:</p>
+            </div>
+            <div class="channels-list">
+              <button class="channel-btn active" data-channel="genel">
+                <span class="channel-icon">📢</span>
+                <span class="channel-name">Genel Duyuru Panosu</span>
+              </button>
+              <button class="channel-btn" data-channel="baskanlik">
+                <span class="channel-icon">👔</span>
+                <span class="channel-name">Başkanlık & Sekreterya</span>
+              </button>
+              <button class="channel-btn" data-channel="fen_isleri">
+                <span class="channel-icon">🚜</span>
+                <span class="channel-name">Fen İşleri Müdürlüğü</span>
+              </button>
+              <button class="channel-btn" data-channel="yazi_isleri">
+                <span class="channel-icon">📜</span>
+                <span class="channel-name">Yazı İşleri Müdürlüğü</span>
+              </button>
+              <button class="channel-btn" data-channel="muhasebe">
+                <span class="channel-icon">💰</span>
+                <span class="channel-name">Mali Hizmetler</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Main Chat Box -->
+          <div class="chat-main-area">
+            <div class="chat-area-header">
+              <span id="chat-current-channel-icon">📢</span>
+              <h2 id="chat-current-channel-title"># Genel Duyuru Panosu</h2>
+              <span class="chat-status-online">🟢 Canlı Bağlantı</span>
+            </div>
+
+            <div class="chat-messages-container" id="chat-messages-list">
+              <!-- Dynamically populated chat messages -->
+            </div>
+
+            <form id="chat-send-form" class="chat-input-area">
+              <input type="text" id="chat-input-text" placeholder="Seçilen birime mesajınızı veya revize notunuzu yazın..." required autocomplete="off">
+              <button type="submit" class="btn btn-primary">Gönder 📤</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 9: YAPAY ZEKA DENETÇİSİ VE ÇAKIŞMA ANALİZİ -->
+      <section id="tab-ai-assistant" class="tab-pane">
+        <div class="executive-grid">
+          <div class="executive-card hero-welcome">
+            <div class="hero-content">
+              <span class="hero-badge">🤖 Eldivan BSK Yapay Zeka Denetçisi v4.0</span>
+              <h2 style="font-size:1.6rem; margin:10px 0; color:#fff;">Otomatik Akıllı Çakışma & Hata Kontrol Paneli</h2>
+              <p style="color:var(--color-text-muted);">Sistemdeki program saatlerini, çakışan toplantıları, süresi geçen evrakları ve yanıtsız birim görevlerini 7/24 denetler ve otomatik düzeltmeler sunar.</p>
+              <div style="display:flex; gap:10px; margin-top:15px; flex-wrap:wrap;">
+                <button id="btn-run-ai-audit" class="btn btn-primary btn-lg">🔍 Yapay Zeka Taraması Yap</button>
+                <button id="btn-ai-autofix" class="btn btn-secondary btn-lg" style="background:#0284c7; color:#fff;">⚡ Çakışan Saatleri Otomatik Düzelt</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="executive-card">
+            <h3>⚠️ Tespit Edilen Çakışmalar & Riskler</h3>
+            <div id="ai-conflicts-list" class="summary-list-stack">
+              <!-- Dynamically rendered AI Audit Findings -->
+            </div>
+          </div>
+
+          <div class="executive-card">
+            <h3>📊 Akıllı Günlük Özet & Analiz Raporu</h3>
+            <div id="ai-daily-summary-report" class="ai-report-box">
+              <!-- Dynamically generated natural language report -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 10: SİSTEM DENETİM LOGLARI -->
+      <section id="tab-audit-logs" class="tab-pane">
+        <div class="section-header-box" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+          <div class="section-title">
+            <h2 style="margin:0; font-size:1.4rem;">📋 Sistem Denetim Logları & İşlem Geçmişi (Audit Trail)</h2>
+            <p style="color:var(--color-text-muted); margin:4px 0 0 0;">Sistemde gerçekleştirilen tüm ekleme, silme, onay ve güncelleme işlemleri kalıcı olarak kayıt altındadır.</p>
+          </div>
+          <div class="section-actions">
+            <input type="text" id="audit-search-input" class="form-control" placeholder="Loglarda ara (Kullanıcı, İşlem...)" style="max-width:250px;">
+          </div>
+        </div>
+
+        <div class="table-responsive-card">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Tarih & Saat</th>
+                <th>Kullanıcı</th>
+                <th>Birim / Rol</th>
+                <th>Yapılan İşlem</th>
+                <th>Açıklama & Detaylar</th>
+              </tr>
+            </thead>
+            <tbody id="audit-logs-table-body">
+              <!-- Dynamically rendered Audit Logs -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Modals -->
+    <div id="modal-mayor" class="modal-backdrop hidden">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h2>👔 Yeni Başkanlık Programı Ekle</h2>
+          <button class="btn-close" onclick="closeModal('modal-mayor')">&times;</button>
+        </div>
+        <form id="form-add-mayor" class="modal-body form-grid">
+          <div class="form-group full-width hidden" id="mayor-ai-conflict-banner" style="background:rgba(217,119,6,0.25); border:1px solid #f59e0b; padding:10px 14px; border-radius:8px; color:#fbbf24; font-size:0.85rem; line-height:1.4;">
+            🤖 <strong>Yapay Zeka Uyarısı:</strong> <span id="mayor-ai-conflict-text"></span>
+          </div>
+          <div class="form-group"><label>Tarih *</label><input type="date" id="mayor-input-date" required></div>
+          <div class="form-group"><label>Saat *</label><input type="time" id="mayor-input-time" value="10:00" required></div>
+          <div class="form-group full-width"><label>Program Başlığı *</label><input type="text" id="mayor-input-title" required placeholder="Valilik Ziyareti / Kabul"></div>
+          <div class="form-group full-width"><label>Mekan / Konum</label><input type="text" id="mayor-input-location" placeholder="Makam Salonu / Ankara Valilik"></div>
+          <div class="form-group full-width">
+            <label style="display:flex; align-items:center; gap:8px; font-weight:700; color:var(--color-accent); font-size:0.88rem; cursor:pointer;">
+              <input type="checkbox" id="mayor-input-is-out-town"> 🚗 Bu Program Şehir Dışı / İl Dışı Programıdır (Diğer birimler için detaylar maskelenir)
+            </label>
+          </div>
+          <div class="form-group full-width"><label>Detaylar</label><textarea id="mayor-input-notes" rows="3"></textarea></div>
+          <div class="modal-footer full-width">
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+            <button type="button" class="btn btn-secondary" onclick="closeModal('modal-mayor')">İptal</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="modal-doc" class="modal-backdrop hidden">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h2>✒️ İmza & Resmi Evrak Girişi</h2>
+          <button class="btn-close" onclick="closeModal('modal-doc')">&times;</button>
+        </div>
+        <form id="form-add-doc" class="modal-body form-grid">
+          <div class="form-group">
+            <label>İmza Türü *</label>
+            <select id="doc-input-sign-type" required>
+              <option value="islak">🔏 Islak İmza</option>
+              <option value="e-imza">💻 E-İmza (EBYS)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Aciliyet Durumu *</label>
+            <select id="doc-input-priority" required>
+              <option value="acil">🔴 Acil İmza</option>
+              <option value="sureli">🟡 Öncelikli / Süreli</option>
+              <option value="normal" selected>🔵 Normal</option>
+            </select>
+          </div>
+          <div class="form-group full-width">
+            <label>Ne İmzası / Ne İçin Oldu (Konu & Başlık) *</label>
+            <input type="text" id="doc-input-title" required placeholder="Örn: İhale Onay Belgesi / Encümen Kararı / Ödeme Emri">
+          </div>
+          <div class="form-group">
+            <label>Evrak / Dosya No (Opsiyonel)</label>
+            <input type="text" id="doc-input-no" placeholder="Örn: 2026/8942">
+          </div>
+          <div class="form-group">
+            <label>Sunan Birim *</label>
+            <select id="doc-input-unit" required>
+              <option value="yazi_isleri">📜 Yazı İşleri Müdürlüğü</option>
+              <option value="fen_isleri">🚜 Fen İşleri Müdürlüğü</option>
+              <option value="muhasebe">💰 Mali Hizmetler / Muhasebe</option>
+              <option value="zabita">👮 Zabıta Amirliği</option>
+              <option value="imar">🏗️ İmar ve Şehircilik Müdürlüğü</option>
+              <option value="park_bahceler">🌳 Park Bahçeler & Temizlik</option>
+              <option value="kultur">🎭 Kültür ve Sosyal İşler</option>
+              <option value="sekreterya">✒️ Özel Kalem & Sekreterya</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Sunan Personel Ad Soyad & Ünvan *</label>
+            <input type="text" id="doc-input-person" required placeholder="Örn: Hasan Kaya (Zabıta Amiri)">
+          </div>
+          <div class="form-group">
+            <label>Hedef / Son İşlem Tarihi *</label>
+            <input type="date" id="doc-input-target-date" required>
+          </div>
+          <div class="form-group full-width">
+            <label>Açıklama / Detay Notu (Gerekirse)</label>
+            <textarea id="doc-input-desc" rows="2" placeholder="İmza içeriği hakkında kısa bilgi..."></textarea>
+          </div>
+          <div class="modal-footer full-width">
+            <button type="submit" class="btn btn-primary">✒️ İmzaya Sun ve Kaydet</button>
+            <button type="button" class="btn btn-secondary" onclick="closeModal('modal-doc')">İptal</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="modal-appnt" class="modal-backdrop hidden">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h2 id="modal-appnt-title">🤝 Yeni Randevu / Görüşme Talebi</h2>
+          <button class="btn-close" onclick="closeModal('modal-appnt')">&times;</button>
+        </div>
+        <form id="form-add-appnt" class="modal-body form-grid">
+          <div class="form-group">
+            <label>Ziyaretçi / Personel Adı Soyadı *</label>
+            <input type="text" id="appnt-input-name" required placeholder="Ahmet Yılmaz">
+          </div>
+          <div class="form-group">
+            <label>Kurum / Birim / Ünvan</label>
+            <input type="text" id="appnt-input-institution" placeholder="Meclis Üyesi / Vatandaş / Fen İşleri Md.">
+          </div>
+          <div class="form-group">
+            <label>Gelen Kategorisi *</label>
+            <select id="appnt-input-category" required>
+              <option value="Randevulu">🤝 Randevulu Vatandaş</option>
+              <option value="Randevusuz">🚶 Randevusuz Vatandaş (Talep)</option>
+              <option value="Kurum / Meclis Üyesi">🏛️ Kurum / Meclis Üyesi / Protokol</option>
+              <option value="Personel">👷 Kurum İçi Personel / Birim Görüşmesi</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Görüşme Önceliği / Aciliyet *</label>
+            <select id="appnt-input-priority" required>
+              <option value="acil">🔴 Acil / Çok Öncelikli</option>
+              <option value="oncelikli">🟡 Öncelikli</option>
+              <option value="normal" selected>🔵 Normal</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Talep Edilen Gün *</label><input type="date" id="appnt-input-date" required></div>
+          <div class="form-group"><label>Talep Edilen Saat *</label><input type="time" id="appnt-input-time" value="11:00" required></div>
+          <div class="form-group full-width"><label>Görüşme Konusu *</label><input type="text" id="appnt-input-topic" required placeholder="Görüşme sebebini yazınız..."></div>
+          <div class="form-group full-width"><label>Notlar</label><textarea id="appnt-input-notes" rows="2"></textarea></div>
+          <div class="modal-footer full-width">
+            <button type="submit" class="btn btn-primary">Kaydet ve İlet</button>
+            <button type="button" class="btn btn-secondary" onclick="closeModal('modal-appnt')">İptal</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- BEKLEME SALONUNA ZİYARETÇİ / PERSONEL EKLEME MODALI -->
+    <div id="modal-waiting-room" class="modal-backdrop hidden">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h2>🪑 Bekleme Salonuna Kayıt Ekle</h2>
+          <button class="btn-close" onclick="closeModal('modal-waiting-room')">&times;</button>
+        </div>
+        <form id="form-add-waiting-room" class="modal-body form-grid">
+          <div class="form-group">
+            <label>Gelen Kişi Adı Soyadı *</label>
+            <input type="text" id="wr-input-name" required placeholder="Örn: Mehmet Demir">
+          </div>
+          <div class="form-group">
+            <label>Kurum / Birim / Mahalle</label>
+            <input type="text" id="wr-input-institution" placeholder="Örn: Meclis Üyesi / Vatandaş / Zabıta">
+          </div>
+          <div class="form-group">
+            <label>Geliş Türü / Kategorisi *</label>
+            <select id="wr-input-type" required>
+              <option value="Randevusuz">🚶 Randevusuz Gelen Vatandaş</option>
+              <option value="Randevulu">🤝 Randevulu Gelen</option>
+              <option value="Kurum / Protokol">🏛️ Kurum / Meclis Üyesi / Protokol</option>
+              <option value="Personel">👷 Belediye Personeli (Kurum İçi)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Öncelik Sırası *</label>
+            <select id="wr-input-priority" required>
+              <option value="1">🔴 1. Derece (Protokol / Meclis Üyesi / Acil)</option>
+              <option value="2">🟡 2. Derece (Randevulu / Öncelikli)</option>
+              <option value="3" selected>🔵 3. Derece (Normal Sıra)</option>
+            </select>
+          </div>
+          <div class="form-group full-width">
+            <label>Görüşme Konusu / Sebebi *</label>
+            <input type="text" id="wr-input-topic" required placeholder="Örn: İmar durumu / Su abonelik talebi / Evrak arzı">
+          </div>
+          <div class="modal-footer full-width">
+            <button type="submit" class="btn btn-primary">🪑 Bekleme Salonuna Al</button>
+            <button type="button" class="btn btn-secondary" onclick="closeModal('modal-waiting-room')">İptal</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- RANDEVUSUZ GELENİ GÜN & SAAT BELİRTEREK RANDEVUYA DÖNÜŞTÜRME MODALI -->
+    <div id="modal-convert-appnt" class="modal-backdrop hidden">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h2>📅 Gün ve Saat Belirterek Randevu Ver</h2>
+          <button class="btn-close" onclick="closeModal('modal-convert-appnt')">&times;</button>
+        </div>
+        <form id="form-convert-waiting-appnt" class="modal-body form-grid">
+          <input type="hidden" id="convert-wr-id">
+          <div class="form-group full-width">
+            <label>Ziyaretçi</label>
+            <input type="text" id="convert-wr-name" readonly style="background:#f1f5f9;">
+          </div>
+          <div class="form-group">
+            <label>Randevu Günü *</label>
+            <input type="date" id="convert-wr-date" required>
+          </div>
+          <div class="form-group">
+            <label>Randevu Saati *</label>
+            <input type="time" id="convert-wr-time" value="14:00" required>
+          </div>
+          <div class="modal-footer full-width">
+            <button type="submit" class="btn btn-primary">✅ Randevu Olarak Onayla</button>
+            <button type="button" class="btn btn-secondary" onclick="closeModal('modal-convert-appnt')">İptal</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- EDIT APPOINTMENT MODAL -->
+    <div id="modal-edit-appnt" class="modal-backdrop hidden">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h2>✏️ Ziyaretçi Randevusu Düzenle</h2>
+          <button class="btn-close" onclick="closeModal('modal-edit-appnt')">&times;</button>
+        </div>
+        <form id="form-edit-appnt" class="modal-body form-grid">
+          <input type="hidden" id="appnt-edit-id">
+          <div class="form-group"><label>Ziyaretçi Adı *</label><input type="text" id="appnt-edit-name" required></div>
+          <div class="form-group"><label>Kurum / Unvan</label><input type="text" id="appnt-edit-institution"></div>
+          <div class="form-group"><label>Tarih *</label><input type="date" id="appnt-edit-date" required></div>
+          <div class="form-group"><label>Saat *</label><input type="time" id="appnt-edit-time" required></div>
+          <div class="form-group full-width"><label>Görüşme Konusu *</label><input type="text" id="appnt-edit-topic" required></div>
+          <div class="form-group full-width"><label>Randevu Durumu *</label>
+            <select id="appnt-edit-status">
+              <option value="Onay Bekliyor">🟡 Onay Bekliyor</option>
+              <option value="Onaylandı">🟢 Onaylandı (Başkan Programında Görünür)</option>
+              <option value="Tamamlandı">🔵 Tamamlandı (Arşive Taşındı)</option>
+            </select>
+          </div>
+          <div class="form-group full-width"><label>Notlar</label><textarea id="appnt-edit-notes" rows="2"></textarea></div>
+          <div class="modal-footer full-width">
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+            <button type="button" class="btn btn-secondary" onclick="closeModal('modal-edit-appnt')">İptal</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="modal-unit-task" class="modal-backdrop hidden">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h2>📢 Birime Görev Ata</h2>
+          <button class="btn-close" onclick="closeModal('modal-unit-task')">&times;</button>
+        </div>
+        <form id="form-add-unit-task" class="modal-body form-grid">
+          <div class="form-group full-width"><label>Görev Başlığı *</label><input type="text" id="ut-input-title" required></div>
+          <div class="form-group"><label>Birim *</label><select id="ut-input-unit" required><option value="fen_isleri">🚜 Fen İşleri</option><option value="yazi_isleri">📜 Yazı İşleri</option><option value="muhasebe">💰 Muhasebe</option><option value="zabita">👮 Zabıta Amirliği</option><option value="imar">🏗️ İmar ve Şehircilik</option><option value="park_bahceler">🌳 Park Bahçeler & Temizlik</option><option value="kultur">🎭 Kültür ve Sosyal İşler</option><option value="sekreterya">✒️ Sekreterya</option></select></div>
+          <div class="form-group"><label>Tarih *</label><input type="date" id="ut-input-date" required></div>
+          <div class="form-group full-width"><label>Talimatlar</label><textarea id="ut-input-notes" rows="3"></textarea></div>
+          <div class="modal-footer full-width">
+            <button type="submit" class="btn btn-primary">Görev Gönder</button>
+            <button type="button" class="btn btn-secondary" onclick="closeModal('modal-unit-task')">İptal</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- TASK RESPOND MODAL (ACCEPT / REJECT / REVISE) -->
+    <div id="modal-task-respond" class="modal-backdrop hidden">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h2 id="task-respond-modal-title">📌 Görev Durumu Güncelle</h2>
+          <button class="btn-close" onclick="closeModal('modal-task-respond')">&times;</button>
+        </div>
+        <form id="form-task-respond" class="modal-body form-grid">
+          <input type="hidden" id="task-respond-id">
+          <div class="form-group full-width">
+            <label>İşlem Türü *</label>
+            <select id="task-respond-action" required>
+              <option value="Kabul Edildi">✅ Görevi Kabul Et ve Başla</option>
+              <option value="Reddedildi">❌ Görevi Gerekçeyle Reddet</option>
+              <option value="Tarih Revize Edildi">📅 Yeni Tarih Öner / Revize Et</option>
+              <option value="Tamamlandı">🎉 Görevi Tamamla</option>
+            </select>
+          </div>
+          <div class="form-group full-width hidden" id="group-task-revised-date">
+            <label>Önerilen Yeni Tarih *</label>
+            <input type="date" id="task-respond-date">
+          </div>
+          <div class="form-group full-width">
+            <label>Açıklama / Birim Notu *</label>
+            <textarea id="task-respond-note" rows="3" required placeholder="Gerekçe, ilerleme durumu veya güncellemelerinizi yazınız..."></textarea>
+          </div>
+          <div class="modal-footer full-width">
+            <button type="submit" class="btn btn-primary">Kaydet ve Gönder</button>
+            <button type="button" class="btn btn-secondary" onclick="closeModal('modal-task-respond')">İptal</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="day-modal" class="modal-backdrop hidden">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h2 id="modal-date-title">Tarih Detayları</h2>
+          <button class="btn-close" onclick="closeModal('day-modal')">&times;</button>
+        </div>
+        <div id="modal-body" class="modal-body"></div>
+        <div class="modal-footer"><button class="btn btn-secondary" onclick="closeModal('day-modal')">Kapat</button></div>
+      </div>
+    </div>
+
+    <div id="print-modal" class="modal-backdrop hidden">
+      <div class="modal-card modal-lg">
+        <div class="modal-header">
+          <h2>🖨️ Eldivan Belediyesi Günlük Takvim Raporu</h2>
+          <button class="btn-close" onclick="closeModal('print-modal')">&times;</button>
+        </div>
+        <div class="modal-body"><div id="printable-report" class="printable-area"></div></div>
+        <div class="modal-footer">
+          <button onclick="window.print()" class="btn btn-primary">Yazdır / PDF</button>
+          <button class="btn-secondary" onclick="closeModal('print-modal')">Kapat</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIRST LOGIN MANDATORY PASSWORD CHANGE MODAL -->
+    <div id="modal-first-login-password-change" class="modal-backdrop hidden" style="z-index:99999;">
+      <div class="modal-card" style="max-width:500px; border-top:4px solid var(--color-danger);">
+        <div class="modal-header" style="background:#fee2e2;">
+          <h2 style="color:#b91c1c; font-size:1.1rem; font-weight:800;">⚠️ Zorunlu Oturum Güvenlik Adımı</h2>
+        </div>
+        <form id="form-first-login-change">
+          <div class="modal-body">
+            <p style="font-size:0.88rem; color:var(--text-main); margin-bottom:14px; line-height:1.4;">
+              Sisteme ilk kez giriş yaptığınız veya varsayılan şifre kullandığınız tespit edilmiştir. Güvenlik ve yetkisiz erişimlerin önlenmesi için <strong>yeni bir kullanıcı adı ve şifre belirlemeniz zorunludur.</strong>
+            </p>
+            <div class="form-group" style="margin-bottom:12px;">
+              <label for="fl-username">Yeni Kullanıcı Adınız *</label>
+              <input type="text" id="fl-username" required placeholder="Yeni kullanıcı adınızı giriniz">
+            </div>
+            <div class="form-group" style="margin-bottom:12px;">
+              <label for="fl-password">Yeni Şifreniz *</label>
+              <input type="password" id="fl-password" required placeholder="Yeni şifrenizi giriniz">
+            </div>
+            <div class="form-group">
+              <label for="fl-password-confirm">Yeni Şifreniz (Tekrar) *</label>
+              <input type="password" id="fl-password-confirm" required placeholder="Yeni şifrenizi doğrulayınız">
+            </div>
+            <p id="fl-error-msg" style="color:#dc2626; font-weight:700; font-size:0.85rem; margin-top:10px;" class="hidden"></p>
+          </div>
+          <div class="modal-footer" style="display:flex; gap:10px;">
+            <button type="submit" class="btn btn-primary" style="flex:1;">🔒 Güncelle ve Devam Et</button>
+            <button type="button" class="btn btn-secondary" onclick="closeModal('modal-first-login-password-change')">⏭️ Şimdilik Atla</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ADMIN USER EDIT & PERMISSION MODAL -->
+    <div id="modal-admin-edit-user" class="modal-backdrop hidden">
+      <div class="modal-card modal-lg">
+        <div class="modal-header">
+          <h2 id="admin-user-modal-title">👤 Kullanıcı Hesabı & Modül Yetkilerini Düzenle</h2>
+          <button type="button" class="btn-close" onclick="closeModal('modal-admin-edit-user')">✕</button>
+        </div>
+        <form id="form-admin-edit-user">
+          <input type="hidden" id="admin-user-orig-username">
+          <div class="modal-body">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="admin-user-username">Kullanıcı Adı *</label>
+                <input type="text" id="admin-user-username" required placeholder="Örn: sekreter2">
+              </div>
+              <div class="form-group">
+                <label for="admin-user-password">Parola / Şifre *</label>
+                <input type="text" id="admin-user-password" required placeholder="••••••••">
+              </div>
+              <div class="form-group">
+                <label for="admin-user-name">Personel Ad Soyad / Unvan *</label>
+                <input type="text" id="admin-user-name" required placeholder="Örn: Ayşe Yılmaz (Fen İşleri)">
+              </div>
+              <div class="form-group">
+                <label for="admin-user-role">Sistem Rolü *</label>
+                <select id="admin-user-role" class="select-input" required>
+                  <option value="admin">👑 Yönetici (Admin)</option>
+                  <option value="baskan">👔 Eldivan Belediye Başkanı</option>
+                  <option value="sekreterya">✒️ Özel Kalem & Sekreterya</option>
+                  <option value="yazi_isleri">📜 Yazı İşleri Müdürlüğü</option>
+                  <option value="fen_isleri">🚜 Fen İşleri Müdürlüğü</option>
+                  <option value="muhasebe">💰 Mali Hizmetler / Muhasebe</option>
+                  <option value="zabita">👮 Zabıta Amirliği</option>
+                  <option value="imar">🏗️ İmar ve Şehircilik Müdürlüğü</option>
+                  <option value="park_bahceler">🌳 Park Bahçeler & Temizlik</option>
+                  <option value="kultur">🎭 Kültür ve Sosyal İşler</option>
+                </select>
+              </div>
+            </div>
+
+            <h4 style="margin:20px 0 10px 0; color:var(--color-primary); font-weight:800; font-size:0.95rem;">
+              🔒 Modül Bazlı Erişim Yetkileri (İşaretlenen Modüller Kullanıcıya Açılır):
+            </h4>
+            <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; background:#f8fafc; padding:16px; border:1px solid #cbd5e1; border-radius:8px;">
+              <label style="display:flex; align-items:center; gap:8px; font-size:0.86rem; font-weight:600; cursor:pointer;"><input type="checkbox" id="perm_daily" checked> 📅 Günlük Görünüm & Özet Pano</label>
+              <label style="display:flex; align-items:center; gap:8px; font-size:0.86rem; font-weight:600; cursor:pointer;"><input type="checkbox" id="perm_mayor" checked> 👔 Başkan Programı</label>
+              <label style="display:flex; align-items:center; gap:8px; font-size:0.86rem; font-weight:600; cursor:pointer;"><input type="checkbox" id="perm_docs" checked> 📄 Evrak & Randevular</label>
+              <label style="display:flex; align-items:center; gap:8px; font-size:0.86rem; font-weight:600; cursor:pointer;"><input type="checkbox" id="perm_archive" checked> 📂 Geçmiş İşler Arşivi</label>
+              <label style="display:flex; align-items:center; gap:8px; font-size:0.86rem; font-weight:600; cursor:pointer;"><input type="checkbox" id="perm_tasks" checked> 📢 Birim Görevleri</label>
+              <label style="display:flex; align-items:center; gap:8px; font-size:0.86rem; font-weight:600; cursor:pointer;"><input type="checkbox" id="perm_chat" checked> 💬 Birimler Arası İletişim</label>
+              <label style="display:flex; align-items:center; gap:8px; font-size:0.86rem; font-weight:600; cursor:pointer;"><input type="checkbox" id="perm_ai" checked> 🤖 Yapay Zeka Denetçisi</label>
+              <label style="display:flex; align-items:center; gap:8px; font-size:0.86rem; font-weight:600; cursor:pointer;"><input type="checkbox" id="perm_calendar" checked> 🗓️ Aylık & Yıllık Görünüm</label>
+              <label style="display:flex; align-items:center; gap:8px; font-size:0.86rem; font-weight:600; cursor:pointer;"><input type="checkbox" id="perm_audit" checked> 📋 Denetim Logları</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="closeModal('modal-admin-edit-user')">İptal</button>
+            <button type="submit" class="btn btn-primary">Kaydet & Yetkileri Güncelle</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

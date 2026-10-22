@@ -1,0 +1,638 @@
+{
+  "categories": [
+    { "id": "belediye", "name": "Belediyecilik & Yerel Yönetim", "color": "#0284c7", "icon": "building-2" },
+    { "id": "milli", "name": "Resmi Bayramlar & Milli Günler", "color": "#dc2626", "icon": "flag" },
+    { "id": "dini", "name": "Dini Bayramlar & Özel Geceler", "color": "#059669", "icon": "moon" },
+    { "id": "cevre_saglik", "name": "Çevre, Su & Sağlık", "color": "#16a34a", "icon": "leaf" },
+    { "id": "sosyal_kultur", "name": "Sosyal Sorumluluk, Eğitim & Kültür", "color": "#d97706", "icon": "heart" }
+  ],
+  "fixed_events": [
+    {
+      "id": "zabita_haftasi",
+      "name": "Zabıta Haftası",
+      "type": "week",
+      "start_month": 9,
+      "start_day": 1,
+      "end_month": 9,
+      "end_day": 7,
+      "category": "belediye",
+      "category_name": "Belediyecilik & Yerel Yönetim",
+      "description": "Belediye Zabıta Teşkilatı'nın kuruluş yıldönümü (4 Eylül 1826). Şehir düzeni, esnaf denetimi, kent huzuru ve halk sağlığı çalışmalarının öne çıkarıldığı haftadır.",
+      "municipal_actions": [
+        "Zabıta personeline tebrik ve başarı plaket töreni düzenlenmesi",
+        "Kent meydanında zabıta araç konvoyu geçişi ve halk bilgilendirme",
+        "Sosyal medya ve billboardlarda Zabıta Teşkilatı kutlama mesajları yayımlanması"
+      ]
+    },
+    {
+      "id": "itfaiye_haftasi",
+      "name": "İtfaiye Haftası",
+      "type": "week",
+      "start_month": 9,
+      "start_day": 25,
+      "end_month": 10,
+      "end_day": 1,
+      "category": "belediye",
+      "category_name": "Belediyecilik & Yerel Yönetim",
+      "description": "Modern Belediye İtfaiye Teşkilatı'nın kuruluş haftası (25 Eylül 1714 / 1923). Yangın güvenliği, can kurtarma ve kahraman itfaiyecilerin anıldığı özel haftadır.",
+      "municipal_actions": [
+        "İtfaiye daire müdürlüğü yangın söndürme ve kurtarma tatbikatı",
+        "İlkokullarda yangın güvenliği eğitimi verilmesi ve broşür dağıtılması",
+        "Görev başında şehit olan itfaiyecilerin anılması"
+      ]
+    },
+    {
+      "id": "muhtarlar_gunu",
+      "name": "Muhtarlar Günü",
+      "type": "day",
+      "month": 10,
+      "day": 19,
+      "category": "belediye",
+      "category_name": "Belediyecilik & Yerel Yönetim",
+      "description": "19 Ekim 1829 tarihinde kurulan muhtarlık müessesesinin anısına, yerel yönetimlerin temel taşı muhtarların günüdür.",
+      "municipal_actions": [
+        "Mahalle muhtarlarının katılımıyla belediye başkanı buluşması ve kahvaltı programı",
+        "Muhtarlara hizmet plaketleri sunulması",
+        "Muhtarlık binalarına belediye destek ziyaretleri"
+      ]
+    },
+    {
+      "id": "dunya_sehircilik_gunu",
+      "name": "Dünya Şehircilik Günü",
+      "type": "day",
+      "month": 11,
+      "day": 8,
+      "category": "belediye",
+      "category_name": "Belediyecilik & Yerel Yönetim",
+      "description": "Şehir planlamasının, düzenli kentleşmenin ve sürdürülebilir mimarinin toplum üzerindeki önemine dikkat çekilen uluslararası gündür.",
+      "municipal_actions": [
+        "İmar ve Şehircilik Dairesi sempozyumu / kentsel dönüşüm lansmanı",
+        "Yeni park ve yeşil alan projesi açılışları",
+        "Geleceğin Akıllı Kenti sergisi açılması"
+      ]
+    },
+    {
+      "id": "dunya_kentler_gunu",
+      "name": "Dünya Kentler Günü",
+      "type": "day",
+      "month": 10,
+      "day": 31,
+      "category": "belediye",
+      "category_name": "Belediyecilik & Yerel Yönetim",
+      "description": "Birleşmiş Milletler (UN-Habitat) tarafından kentleşme sorunlarına çözüm üretmek ve kent içi yaşam kalitesini artırmak için belirlenen gündür.",
+      "municipal_actions": [
+        "Kentsel sürdürülebilirlik raporu yayımlanması",
+        "Belediye Kent Konseyi özel oturumu"
+      ]
+    },
+    {
+      "id": "turkiye_cevre_haftasi",
+      "name": "Türkiye Çevre Haftası & Dünya Çevre Günü",
+      "type": "week",
+      "start_month": 6,
+      "start_day": 5,
+      "end_month": 6,
+      "end_day": 11,
+      "category": "cevre_saglik",
+      "category_name": "Çevre, Su & Sağlık",
+      "description": "5 Haziran Dünya Çevre Günü ile başlayan Türkiye Çevre Haftası; Sıfır Atık, iklim değişikliği ve çevre temizliği bilincinin yaygınlaştırıldığı haftadır.",
+      "municipal_actions": [
+        "Sahil, park ve nehir yataklarında toplu çevre temizlik etkinliği",
+        "Geri dönüşüm ve Sıfır Atık stantlarının kurulması",
+        "Fidan dikimi ve çevre bilinci ödüllü yarışmalar"
+      ]
+    },
+    {
+      "id": "dunya_su_gunu",
+      "name": "Dünya Su Günü",
+      "type": "day",
+      "month": 3,
+      "day": 22,
+      "category": "cevre_saglik",
+      "category_name": "Çevre, Su & Sağlık",
+      "description": "Tatlı su kaynaklarının korunması ve su tasarrufu bilincinin geliştirilmesi amacıyla kutlanan uluslararası gündür.",
+      "municipal_actions": [
+        "Su ve Kanalizasyon İdaresi (SKİ) su tasarrufu kampanyası duyurusu",
+        "İçme suyu arıtma tesislerine öğrenci gezileri düzenlenmesi"
+      ]
+    },
+    {
+      "id": "orman_haftasi",
+      "name": "Orman Haftası & Dünya Ormancılık Günü",
+      "type": "week",
+      "start_month": 3,
+      "start_day": 21,
+      "end_month": 3,
+      "end_day": 26,
+      "category": "cevre_saglik",
+      "category_name": "Çevre, Su & Sağlık",
+      "description": "21 Mart Dünya Ormancılık Günü ile başlayan haftada ağaç sevgisi ve orman koruma bilinci aşılanır.",
+      "municipal_actions": [
+        "Belediye hatıra ormanı ağaç dikim töreni",
+        "Vatandaşlara ücretsiz fidan dağıtımı"
+      ]
+    },
+    {
+      "id": "avrupa_hareketlilik_haftasi",
+      "name": "Avrupa Hareketlilik Haftası",
+      "type": "week",
+      "start_month": 9,
+      "start_day": 16,
+      "end_month": 9,
+      "end_day": 22,
+      "category": "belediye",
+      "category_name": "Belediyecilik & Yerel Yönetim",
+      "description": "Sürdürülebilir kentsel ulaşım, bisiklet yolları ve yaya dostu şehir planlamasını teşvik eden belediye odaklı haftadır.",
+      "municipal_actions": [
+        "'Arabasız Gün' etkinliği düzenlenerek belirlenen caddelerin yayalaştırılması",
+        "Toplu taşıma ve bisiklet sürüş etkinlikleri"
+      ]
+    },
+    {
+      "id": "deprem_haftasi",
+      "name": "Deprem Haftası",
+      "type": "week",
+      "start_month": 3,
+      "start_day": 1,
+      "end_month": 3,
+      "end_day": 7,
+      "category": "belediye",
+      "category_name": "Belediyecilik & Yerel Yönetim",
+      "description": "Deprem bilinci, kentsel dönüşüm gerekliliği ve afet hazırlığı konusunda toplumun bilgilendirildiği haftadır.",
+      "municipal_actions": [
+        "Belediye Afet Müdahale Ekipleri tatbikatı",
+        "Arama-kurtarma ekipmanları sergisi ve deprem simülasyonu"
+      ]
+    },
+    {
+      "id": "dunya_afet_risklerinin_azaltilmasi",
+      "name": "Dünya Afet Risklerinin Azaltılması Günü",
+      "type": "day",
+      "month": 10,
+      "day": 13,
+      "category": "belediye",
+      "category_name": "Belediyecilik & Yerel Yönetim",
+      "description": "Doğal afet risklerini minimize etme ve dirençli kentler inşa etme bilincinin öne çıkarıldığı uluslararası gündür.",
+      "municipal_actions": [
+        "Afet toplanma alanlarının güncellenmesi ve bilgilendirme duyurusu"
+      ]
+    },
+    {
+      "id": "sivil_savunma_gunu",
+      "name": "Sivil Savunma Günü",
+      "type": "day",
+      "month": 2,
+      "day": 28,
+      "category": "belediye",
+      "category_name": "Belediyecilik & Yerel Yönetim",
+      "description": "Sivil savunma hizmetleri ve arama-kurtarma faaliyetlerinin önemi vurgulanır.",
+      "municipal_actions": ["Belediye sivil savunma ekipleri anma ve bilinçlendirme etkinliği"]
+    },
+    {
+      "id": "yilbasi",
+      "name": "Yılbaşı Tatili",
+      "type": "day",
+      "month": 1,
+      "day": 1,
+      "is_official_holiday": true,
+      "category": "milli",
+      "category_name": "Resmi Bayramlar & Milli Günler",
+      "description": "Yeni yılın ilk günü resmi tatildir.",
+      "municipal_actions": ["Nöbetçi belediye birimleri ve acil müdahale ekiplerinin organizasyonu"]
+    },
+    {
+      "id": "canakkale_zaferi",
+      "name": "18 Mart Çanakkale Zaferi ve Şehitleri Anma Günü",
+      "type": "day",
+      "month": 3,
+      "day": 18,
+      "category": "milli",
+      "category_name": "Resmi Bayramlar & Milli Günler",
+      "description": "Çanakkale Deniz Zaferi'nin yıldönümü ve vatan uğruna can veren tüm şehitlerimizin anıldığı gurur günüdür.",
+      "municipal_actions": [
+        "Şehitlik ziyareti ve çelenk sunma töreni",
+        "Şehit ailelerine ve gazilere belediye başkanı ev sahipliğinde yemek programı",
+        "Kültür merkezlerinde Çanakkale Destanı sergi ve tiyatro gösterileri"
+      ]
+    },
+    {
+      "id": "23_nisan",
+      "name": "23 Nisan Ulusal Egemenlik ve Çocuk Bayramı",
+      "type": "day",
+      "month": 4,
+      "day": 23,
+      "is_official_holiday": true,
+      "category": "milli",
+      "category_name": "Resmi Bayramlar & Milli Günler",
+      "description": "TBMM'nin açılışı ve Atatürk'ün dünya çocuklarına armağan ettiği Türkiye'nin ilk milli bayramı.",
+      "municipal_actions": [
+        "Belediye Başkanlığı makamının sembolik olarak çocuk başkana devredilmesi",
+        "Kent parklarında ücretsiz Çocuk Şenliği, şişme oyun parkları ve gösteriler",
+        "Resmi törenler ve bayrak süslemeleri"
+      ]
+    },
+    {
+      "id": "1_mayis",
+      "name": "1 Mayıs Emek ve Dayanışma Günü",
+      "type": "day",
+      "month": 5,
+      "day": 1,
+      "is_official_holiday": true,
+      "category": "milli",
+      "category_name": "Resmi Bayramlar & Milli Günler",
+      "description": "İşçi ve emekçilerin birlik, dayanışma ve haksızlıklarla mücadele günü (Resmi Tatil).",
+      "municipal_actions": [
+        "Belediye saha çalışanları ve emekçilerine tebrik mesajı",
+        "Nöbetçi temizlik ve fen işleri ekiplerinin ayarlanması"
+      ]
+    },
+    {
+      "id": "19_mayis",
+      "name": "19 Mayıs Atatürk'ü Anma, Gençlik ve Spor Bayramı",
+      "type": "day",
+      "month": 5,
+      "day": 19,
+      "is_official_holiday": true,
+      "category": "milli",
+      "category_name": "Resmi Bayramlar & Milli Günler",
+      "description": "Atatürk'ün Samsun'a çıkarak Kurtuluş Savaşı'nı başlattığı tarihi gün ve gençlik bayramı.",
+      "municipal_actions": [
+        "Gençlik Konseri ve Kortej Yürüyüşü organizasyonu",
+        "Gençlik ve Spor Turnuvaları (Sokak basketbolu, maraton vb.) düzenlenmesi"
+      ]
+    },
+    {
+      "id": "15_temmuz",
+      "name": "15 Temmuz Demokrasi ve Milli Birlik Günü",
+      "type": "day",
+      "month": 7,
+      "day": 15,
+      "is_official_holiday": true,
+      "category": "milli",
+      "category_name": "Resmi Bayramlar & Milli Günler",
+      "description": "Milli irade ve demokrasi mücadelesinde şehit olan kahramanlarımızın anıldığı resmi tatil günü.",
+      "municipal_actions": [
+        "15 Temmuz Anma Yürüyüşü ve Meydan Programı",
+        "Şehitlik ziyaretleri ve fotoğraf sergisi"
+      ]
+    },
+    {
+      "id": "30_agustos",
+      "name": "30 Ağustos Zafer Bayramı",
+      "type": "day",
+      "month": 8,
+      "day": 30,
+      "is_official_holiday": true,
+      "category": "milli",
+      "category_name": "Resmi Bayramlar & Milli Günler",
+      "description": "Büyük Taarruz'un zaferle sonuçlandığı ve Türk vatanının işgalden kurtarıldığı tarihi bayram.",
+      "municipal_actions": [
+        "Zafer Yürüyüşü, Fener Alayı ve Halk Konseri organizasyonu",
+        "Cadde ve sokakların bayraklarla donatılması"
+      ]
+    },
+    {
+      "id": "29_ekim",
+      "name": "29 Ekim Cumhuriyet Bayramı",
+      "type": "day",
+      "month": 10,
+      "day": 29,
+      "is_official_holiday": true,
+      "category": "milli",
+      "category_name": "Resmi Bayramlar & Milli Günler",
+      "description": "Türkiye Cumhuriyeti'nin kuruluşunun ilan edildiği en büyük milli bayramımız. (28 Ekim yarım gün).",
+      "municipal_actions": [
+        "Cumhuriyet Korteji ve Fener Alayı",
+        "Cumhuriyet Konseri ve Işık Gösterileri",
+        "Belediye binalarının ve kent meydanının dev Türk Bayraklarıyla süslenmesi"
+      ]
+    },
+    {
+      "id": "10_kasim",
+      "name": "10 Kasım Atatürk'ü Anma Günü ve Atatürk Haftası",
+      "type": "week",
+      "start_month": 11,
+      "start_day": 10,
+      "end_month": 11,
+      "end_day": 16,
+      "category": "milli",
+      "category_name": "Resmi Bayramlar & Milli Günler",
+      "description": "Gazi Mustafa Kemal Atatürk'ün ebediyete intikal ettiği gün (10 Kasım saat 09:05) ve anma haftası.",
+      "municipal_actions": [
+        "Saat 09:05'te siren sesleri eşliğinde 2 dakikalık saygı duruşu ve çelenk töreni",
+        "Atatürk fotoğrafları sergisi ve anma paneli düzenlenmesi"
+      ]
+    },
+    {
+      "id": "istiklal_marsi_kabulu",
+      "name": "12 Mart İstiklal Marşı'nın Kabulü ve Mehmet Akif Ersoy'u Anma Günü",
+      "type": "day",
+      "month": 3,
+      "day": 12,
+      "category": "milli",
+      "category_name": "Resmi Bayramlar & Milli Günler",
+      "description": "Milli marşımızın kabulü ve milli şairimiz Mehmet Akif Ersoy'u anma günü.",
+      "municipal_actions": ["Okullar arası İstiklal Marşı Okuma Yarışması ödül töreni"]
+    },
+    {
+      "id": "istanbulun_fethi",
+      "name": "29 Mayıs İstanbul'un Fethi",
+      "type": "day",
+      "month": 5,
+      "day": 29,
+      "category": "milli",
+      "category_name": "Resmi Bayramlar & Milli Günler",
+      "description": "Fatih Sultan Mehmet tarafından İstanbul'un fethinin kutlandığı tarihi gün.",
+      "municipal_actions": ["Mehteran gösterisi ve fetih kutlama programı"]
+    },
+    {
+      "id": "dunya_kadinlar_gunu",
+      "name": "8 Mart Dünya Kadınlar Günü",
+      "type": "day",
+      "month": 3,
+      "day": 8,
+      "category": "sosyal_kultur",
+      "category_name": "Sosyal Sorumluluk, Eğitim & Kültür",
+      "description": "Kadınların siyasi, sosyal ve ekonomik başarılarının kutlandığı uluslararası gündür.",
+      "municipal_actions": [
+        "Kadın emek pazarı ve kadın el sanatları sergisi açılması",
+        "Kadın belediye personeli ve vatandaşlara çiçek takdimi"
+      ]
+    },
+    {
+      "id": "nevruz_bayrami",
+      "name": "21 Mart Nevruz Bayramı",
+      "type": "day",
+      "month": 3,
+      "day": 21,
+      "category": "sosyal_kultur",
+      "category_name": "Sosyal Sorumluluk, Eğitim & Kültür",
+      "description": "Baharın gelişi, doğanın uyanışı ve kardeşlik ateşi Nevruz kutlaması.",
+      "municipal_actions": ["Geleneksel Nevruz ateşi yakılması, örste demir dövme ve bahar şenliği"]
+    },
+    {
+      "id": "dunya_down_sendromu",
+      "name": "21 Mart Dünya Down Sendromu Farkındalık Günü",
+      "type": "day",
+      "month": 3,
+      "day": 21,
+      "category": "sosyal_kultur",
+      "category_name": "Sosyal Sorumluluk, Eğitim & Kültür",
+      "description": "Down sendromlu bireylerin toplumdaki yerini ve +1 değerini vurgulayan farkındalık günü.",
+      "municipal_actions": ["Down kafesi / Engelsiz yaşam merkezi özel etkinliği"]
+    },
+    {
+      "id": "dunya_tiyatro_gunu",
+      "name": "27 Mart Dünya Tiyatro Günü",
+      "type": "day",
+      "month": 3,
+      "day": 27,
+      "category": "sosyal_kultur",
+      "category_name": "Sosyal Sorumluluk, Eğitim & Kültür",
+      "description": "Tiyatro sanatının önemine vurgu yapılan uluslararası gündür.",
+      "municipal_actions": [
+        "Belediye Şehir Tiyatrosu ücretsiz oyun gösterimleri",
+        "Dünya Tiyatro Bildirisi okunması"
+      ]
+    },
+    {
+      "id": "dunya_otizm_farkindalik",
+      "name": "2 Nisan Dünya Otizm Farkındalık Günü",
+      "type": "day",
+      "month": 4,
+      "day": 2,
+      "category": "sosyal_kultur",
+      "category_name": "Sosyal Sorumluluk, Eğitim & Kültür",
+      "description": "Otizme dikkat çekmek için 'Otizme Mavi Işık Yak' kampanyasıyla bilinen farkındalık günü.",
+      "municipal_actions": [
+        "Belediye hizmet binası ve simge yapıların mavi ışıkla aydınlatılması",
+        "Otizm bilgilendirme semineri"
+      ]
+    },
+    {
+      "id": "saglik_haftasi",
+      "name": "Sağlık Haftası & 7 Nisan Dünya Sağlık Günü",
+      "type": "week",
+      "start_month": 4,
+      "start_day": 7,
+      "end_month": 4,
+      "end_day": 13,
+      "category": "cevre_saglik",
+      "category_name": "Çevre, Su & Sağlık",
+      "description": "Halk sağlığı, koruyucu hekimlik ve sağlıklı yaşam bilincinin işlendiği haftadır.",
+      "municipal_actions": [
+        "Belediye Sağlık İşleri Dairesi tarafından ücretsiz tansiyon/şeker taraması",
+        "Açık havada toplu egzersiz ve yürüyüş etkinliği"
+      ]
+    },
+    {
+      "id": "turizm_haftasi",
+      "name": "Turizm Haftası",
+      "type": "week",
+      "start_month": 4,
+      "start_day": 15,
+      "end_month": 4,
+      "end_day": 22,
+      "category": "sosyal_kultur",
+      "category_name": "Sosyal Sorumluluk, Eğitim & Kültür",
+      "description": "Şehrin tarihi, kültürel ve turistik değerlerinin tanıtıldığı haftadır.",
+      "municipal_actions": ["Kültür turları, ücretsiz müze gezileri ve kent tanıtım sergisi"]
+    },
+    {
+      "id": "trafik_haftasi",
+      "name": "Karayolu Trafik Güvenliği Haftası",
+      "type": "week",
+      "start_month": 5,
+      "start_day": 1,
+      "end_month": 5,
+      "end_day": 7,
+      "category": "belediye",
+      "category_name": "Belediyecilik & Yerel Yönetim",
+      "description": "Yaya önceliği, trafik kuralları ve ulaşım güvenliğine dikkat çekilen haftadır.",
+      "municipal_actions": [
+        "Çocuk Trafik Eğitim Parkı'nda uygulamalı trafik eğitimi verilmesi",
+        "Yaya geçitleri boyama ve uyarı çizgileri yenileme"
+      ]
+    },
+    {
+      "id": "engelliler_haftasi",
+      "name": "Engelliler Haftası",
+      "type": "week",
+      "start_month": 5,
+      "start_day": 10,
+      "end_month": 5,
+      "end_day": 16,
+      "category": "sosyal_kultur",
+      "category_name": "Sosyal Sorumluluk, Eğitim & Kültür",
+      "description": "Engelli bireylerin toplumsal yaşama tam katılımı ve erişilebilirlik bilincinin yükseltildiği haftadır.",
+      "municipal_actions": [
+        "Engelsiz Kent projeleri lansmanı",
+        "Tekerlekli sandalye dağıtımı ve engelli spor şenliği"
+      ]
+    },
+    {
+      "id": "muzeler_haftasi",
+      "name": "Müzeler Haftası",
+      "type": "week",
+      "start_month": 5,
+      "start_day": 18,
+      "end_month": 5,
+      "end_day": 24,
+      "category": "sosyal_kultur",
+      "category_name": "Sosyal Sorumluluk, Eğitim & Kültür",
+      "description": "Kültürel mirasın korunması ve belediye müzelerinin tanıtıldığı haftadır.",
+      "municipal_actions": ["Belediyeye ait kent müzelerinin ücretsiz ziyarete açılması"]
+    },
+    {
+      "id": "gaziler_gunu",
+      "name": "19 Eylül Gaziler Günü",
+      "type": "day",
+      "month": 9,
+      "day": 19,
+      "category": "milli",
+      "category_name": "Resmi Bayramlar & Milli Günler",
+      "description": "Atatürk'e 'Gazilik' unvanının veriliş yıldönümü ve kahraman gazilerimizin günü.",
+      "municipal_actions": ["Gazi ve gazi yakınlarına belediye başkanı ağırlama yemeği ve hediye sunumu"]
+    },
+    {
+      "id": "hayvanlari_koruma_gunu",
+      "name": "4 Ekim Dünya Hayvanları Koruma Günü",
+      "type": "day",
+      "month": 10,
+      "day": 4,
+      "category": "cevre_saglik",
+      "category_name": "Çevre, Su & Sağlık",
+      "description": "Sokak hayvanları, sevimli dostlarımız ve doğal yaşam ortamlarının korunması günü.",
+      "municipal_actions": [
+        "Belediye Hayvan Bakımevi ve Rehabilitasyon Merkezi ziyaretleri ve mama dağıtımı",
+        "Sokak hayvanlarını sahiplendirme kampanyası lansmanı"
+      ]
+    },
+    {
+      "id": "kizilay_haftasi",
+      "name": "Kızılay Haftası",
+      "type": "week",
+      "start_month": 10,
+      "start_day": 29,
+      "end_month": 11,
+      "end_day": 4,
+      "category": "sosyal_kultur",
+      "category_name": "Sosyal Sorumluluk, Eğitim & Kültür",
+      "description": "Yardımlaşma, kan bağışı ve insani yardım bilincinin Kızılay ile işbirliği içinde işlendiği haftadır.",
+      "municipal_actions": ["Belediye meydanına Kızılay kan bağış aracı kurulması ve belediye personelinin kan bağışı"]
+    },
+    {
+      "id": "organ_bagisi_haftasi",
+      "name": "Organ Bağışı Haftası",
+      "type": "week",
+      "start_month": 11,
+      "start_day": 3,
+      "end_month": 11,
+      "end_day": 9,
+      "category": "cevre_saglik",
+      "category_name": "Çevre, Su & Sağlık",
+      "description": "Organ nakli bekleyen binlerce hastaya umut olmak için bağış bilincinin artırıldığı haftadır.",
+      "municipal_actions": ["Organ bağış standı açılması ve bilgilendirme broşürleri"]
+    },
+    {
+      "id": "ogretmenler_gunu",
+      "name": "24 Kasım Öğretmenler Günü",
+      "type": "day",
+      "month": 11,
+      "day": 24,
+      "category": "sosyal_kultur",
+      "category_name": "Sosyal Sorumluluk, Eğitim & Kültür",
+      "description": "Atatürk'ün Millet Mektepleri Başöğretmenliğini kabul ettiği tarihi gün ve fedakar öğretmenlerimizin bayramı.",
+      "municipal_actions": [
+        "Emekli öğretmenlere belediye ziyareti",
+        "Öğretmenler Günü Özel Konseri ve öğretmenlere hediye dağıtımı"
+      ]
+    },
+    {
+      "id": "dunya_engelliler_gunu",
+      "name": "3 Aralık Dünya Engelliler Günü",
+      "type": "day",
+      "month": 12,
+      "day": 3,
+      "category": "sosyal_kultur",
+      "category_name": "Sosyal Sorumluluk, Eğitim & Kültür",
+      "description": "Engelli bireylerin hakları ve toplumsal yaşam kalitelerinin artırılması uluslararası günü.",
+      "municipal_actions": [
+        "Engelsiz yaşam merkezi gösterileri ve spor müsabakaları",
+        "Erişilebilirlik sertifikaları töreni"
+      ]
+    },
+    {
+      "id": "turk_mallari_haftasi",
+      "name": "12-18 Aralık Tutum, Yatırım ve Türk Malları Haftası (Yerli Malı)",
+      "type": "week",
+      "start_month": 12,
+      "start_day": 12,
+      "end_month": 12,
+      "end_day": 18,
+      "category": "sosyal_kultur",
+      "category_name": "Sosyal Sorumluluk, Eğitim & Kültür",
+      "description": "Yerli üretimi destekleme, tutumlu olma ve milli ekonomiye katkı bilincinin aşılandığı haftadır.",
+      "municipal_actions": ["Yöresel ürünler pazarı ve yerli üreticiyi destekleme standı"]
+    }
+  ],
+  "hijri_events_mapping": {
+    "2025": [
+      { "name": "Regaip Kandili", "month": 1, "day": 2, "category": "dini" },
+      { "name": "Miraç Kandili", "month": 1, "day": 26, "category": "dini" },
+      { "name": "Berat Kandili", "month": 2, "day": 13, "category": "dini" },
+      { "name": "Ramazan Başlangıcı", "month": 3, "day": 1, "category": "dini" },
+      { "name": "Kadir Gecesi", "month": 3, "day": 26, "category": "dini" },
+      { "name": "Ramazan Bayramı Arifesi", "month": 3, "day": 29, "category": "dini" },
+      { "name": "Ramazan Bayramı 1. Gün", "month": 3, "day": 30, "is_official_holiday": true, "category": "dini" },
+      { "name": "Ramazan Bayramı 2. Gün", "month": 3, "day": 31, "is_official_holiday": true, "category": "dini" },
+      { "name": "Ramazan Bayramı 3. Gün", "month": 4, "day": 1, "is_official_holiday": true, "category": "dini" },
+      { "name": "Kurban Bayramı Arifesi", "month": 6, "day": 5, "category": "dini" },
+      { "name": "Kurban Bayramı 1. Gün", "month": 6, "day": 6, "is_official_holiday": true, "category": "dini" },
+      { "name": "Kurban Bayramı 2. Gün", "month": 6, "day": 7, "is_official_holiday": true, "category": "dini" },
+      { "name": "Kurban Bayramı 3. Gün", "month": 6, "day": 8, "is_official_holiday": true, "category": "dini" },
+      { "name": "Kurban Bayramı 4. Gün", "month": 6, "day": 9, "is_official_holiday": true, "category": "dini" },
+      { "name": "Hicri Yılbaşı", "month": 6, "day": 26, "category": "dini" },
+      { "name": "Aşure Günü", "month": 7, "day": 5, "category": "dini" },
+      { "name": "Mevlid Kandili", "month": 9, "day": 3, "category": "dini" }
+    ],
+    "2026": [
+      { "name": "Regaip Kandili", "month": 1, "day": 15, "category": "dini" },
+      { "name": "Miraç Kandili", "month": 2, "day": 15, "category": "dini" },
+      { "name": "Berat Kandili", "month": 3, "day": 4, "category": "dini" },
+      { "name": "Ramazan Başlangıcı", "month": 3, "day": 19, "category": "dini" },
+      { "name": "Kadir Gecesi", "month": 4, "day": 13, "category": "dini" },
+      { "name": "Ramazan Bayramı Arifesi", "month": 4, "day": 19, "category": "dini" },
+      { "name": "Ramazan Bayramı 1. Gün", "month": 4, "day": 20, "is_official_holiday": true, "category": "dini" },
+      { "name": "Ramazan Bayramı 2. Gün", "month": 4, "day": 21, "is_official_holiday": true, "category": "dini" },
+      { "name": "Ramazan Bayramı 3. Gün", "month": 4, "day": 22, "is_official_holiday": true, "category": "dini" },
+      { "name": "Kurban Bayramı Arifesi", "month": 5, "day": 26, "category": "dini" },
+      { "name": "Kurban Bayramı 1. Gün", "month": 5, "day": 27, "is_official_holiday": true, "category": "dini" },
+      { "name": "Kurban Bayramı 2. Gün", "month": 5, "day": 28, "is_official_holiday": true, "category": "dini" },
+      { "name": "Kurban Bayramı 3. Gün", "month": 5, "day": 29, "is_official_holiday": true, "category": "dini" },
+      { "name": "Kurban Bayramı 4. Gün", "month": 5, "day": 30, "is_official_holiday": true, "category": "dini" },
+      { "name": "Hicri Yılbaşı", "month": 6, "day": 16, "category": "dini" },
+      { "name": "Aşure Günü", "month": 6, "day": 25, "category": "dini" },
+      { "name": "Mevlid Kandili", "month": 8, "day": 25, "category": "dini" }
+    ],
+    "2027": [
+      { "name": "Regaip Kandili", "month": 1, "day": 7, "category": "dini" },
+      { "name": "Miraç Kandili", "month": 2, "day": 4, "category": "dini" },
+      { "name": "Berat Kandili", "month": 2, "day": 21, "category": "dini" },
+      { "name": "Ramazan Başlangıcı", "month": 3, "day": 9, "category": "dini" },
+      { "name": "Kadir Gecesi", "month": 4, "day": 3, "category": "dini" },
+      { "name": "Ramazan Bayramı Arifesi", "month": 4, "day": 8, "category": "dini" },
+      { "name": "Ramazan Bayramı 1. Gün", "month": 4, "day": 9, "is_official_holiday": true, "category": "dini" },
+      { "name": "Ramazan Bayramı 2. Gün", "month": 4, "day": 10, "is_official_holiday": true, "category": "dini" },
+      { "name": "Ramazan Bayramı 3. Gün", "month": 4, "day": 11, "is_official_holiday": true, "category": "dini" },
+      { "name": "Kurban Bayramı Arifesi", "month": 5, "day": 16, "category": "dini" },
+      { "name": "Kurban Bayramı 1. Gün", "month": 5, "day": 17, "is_official_holiday": true, "category": "dini" },
+      { "name": "Kurban Bayramı 2. Gün", "month": 5, "day": 18, "is_official_holiday": true, "category": "dini" },
+      { "name": "Kurban Bayramı 3. Gün", "month": 5, "day": 19, "is_official_holiday": true, "category": "dini" },
+      { "name": "Kurban Bayramı 4. Gün", "month": 5, "day": 20, "is_official_holiday": true, "category": "dini" },
+      { "name": "Hicri Yılbaşı", "month": 6, "day": 6, "category": "dini" },
+      { "name": "Aşure Günü", "month": 6, "day": 15, "category": "dini" },
+      { "name": "Mevlid Kandili", "month": 8, "day": 14, "category": "dini" }
+    ]
+  }
+}

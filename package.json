@@ -1,0 +1,23 @@
+{
+  "name": "belediye-takvimi",
+  "version": "1.0.0",
+  "description": "T.C. Belediye Önemli Günler ve Haftalar Masaüstü Takvim & Bildirim Programı",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "start:server": "node server.js",
+    "dev": "electron ."
+  },
+  "keywords": [
+    "belediye",
+    "takvim",
+    "onemli-gunler",
+    "bildirim",
+    "electron"
+  ],
+  "author": "Antigravity AI",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^34.0.0"
+  }
+}
